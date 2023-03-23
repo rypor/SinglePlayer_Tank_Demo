@@ -19,16 +19,9 @@ namespace INoodleI
 
         private Vector3 reticlePosition;
         private Vector3 reticleNormal;
+        private InputData inputData;
 
-        public Vector3 ReticlePosition
-        {
-            get { return reticlePosition; }
-        }
-        public Vector3 ReticleNormal
-        {
-            get { return reticleNormal; }
-        }
-
+        public InputData InputData { get { return inputData; } }
 
         #endregion
 
@@ -41,6 +34,10 @@ namespace INoodleI
             {
                 HandleInputs();
             }
+            else
+            {
+                Debug.LogError("No Camera Ref: Tank Input - " + gameObject);
+            }
         }
 
         #endregion
@@ -49,6 +46,30 @@ namespace INoodleI
 
         protected virtual void HandleInputs()
         {
+            Vector2 movementInput = new Vector2(0, 0);
+            bool fireBullet;
+            bool plantMine;
+
+            Vector3 reticleNormal = Vector3.zero;
+            Vector3 reticlePosition = Vector3.zero;
+
+            // Keyboard Movement Input
+            if (Input.GetKey(KeyCode.W))
+                movementInput.y++;
+            if (Input.GetKey(KeyCode.S))
+                movementInput.y--;
+            if (Input.GetKey(KeyCode.A))
+                movementInput.x--;
+            if (Input.GetKey(KeyCode.D))
+                movementInput.x++;
+
+            // Fire Bullet Input
+            fireBullet = Input.GetKey(KeyCode.Mouse0);
+
+            // Plant Mine Input
+            plantMine = Input.GetKey(KeyCode.Mouse1);
+
+            // Mouse Target Input
             Ray screenRay = camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if(Physics.Raycast(screenRay, out hit))
@@ -56,6 +77,15 @@ namespace INoodleI
                 reticlePosition = hit.point;
                 reticleNormal = hit.normal;
             }
+
+            inputData = new InputData
+            {
+                movementInput = movementInput,
+                firePressed = fireBullet,
+                minePressed = plantMine,
+                reticleNormal = reticleNormal,
+                reticlePosition = reticlePosition,
+            };
         }
 
         #endregion
@@ -64,10 +94,18 @@ namespace INoodleI
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(reticlePosition, 0.5f);
         }
 
         #endregion
+    }
+
+    public struct InputData
+    {
+        public Vector2 movementInput;
+        public bool firePressed;
+        public bool minePressed;
+
+        public Vector3 reticlePosition;
+        public Vector3 reticleNormal;
     }
 }
