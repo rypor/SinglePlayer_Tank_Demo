@@ -11,11 +11,11 @@ TagManager:
   - 
   - Water
   - UI
+  - LocalPlayer
+  - NetworkPlayer
   - 
   - 
-  - 
-  - 
-  - 
+  - Environment
   - 
   - 
   - 

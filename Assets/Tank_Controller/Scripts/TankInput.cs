@@ -9,8 +9,8 @@ namespace INoodleI
     {
         #region Variables
 
-        [Header("Input Properties")]
-        public Camera camera;
+        //[Header("Input Properties")]
+        private Camera cam;
 
         #endregion
 
@@ -28,9 +28,14 @@ namespace INoodleI
 
         #region Builtin Methods
 
+        private void Awake()
+        {
+            cam = Camera.main;
+        }
+
         private void Update()
         {
-            if(camera)
+            if(cam)
             {
                 HandleInputs();
             }
@@ -46,10 +51,12 @@ namespace INoodleI
 
         protected virtual void HandleInputs()
         {
+            // Variable Declaration
             Vector2 movementInput = new Vector2(0, 0);
             bool fireBullet;
             bool plantMine;
 
+            bool reticleHit;
             Vector3 reticleNormal = Vector3.zero;
             Vector3 reticlePosition = Vector3.zero;
 
@@ -70,21 +77,28 @@ namespace INoodleI
             plantMine = Input.GetKey(KeyCode.Mouse1);
 
             // Mouse Target Input
-            Ray screenRay = camera.ScreenPointToRay(Input.mousePosition);
+            Ray screenRay = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if(Physics.Raycast(screenRay, out hit))
             {
+                reticleHit = true;
                 reticlePosition = hit.point;
                 reticleNormal = hit.normal;
             }
+            else
+            {
+                reticleHit = false;
+            }
 
+            // Compile Data
             inputData = new InputData
             {
-                movementInput = movementInput,
-                firePressed = fireBullet,
-                minePressed = plantMine,
-                reticleNormal = reticleNormal,
-                reticlePosition = reticlePosition,
+                Movement = movementInput,
+                FirePressed = fireBullet,
+                MinePressed = plantMine,
+                ReticleHit = reticleHit,
+                ReticleNormal = reticleNormal,
+                ReticlePosition = reticlePosition,
             };
         }
 
@@ -101,11 +115,12 @@ namespace INoodleI
 
     public struct InputData
     {
-        public Vector2 movementInput;
-        public bool firePressed;
-        public bool minePressed;
+        public Vector2 Movement;
+        public bool FirePressed;
+        public bool MinePressed;
 
-        public Vector3 reticlePosition;
-        public Vector3 reticleNormal;
+        public bool ReticleHit;
+        public Vector3 ReticlePosition;
+        public Vector3 ReticleNormal;
     }
 }
