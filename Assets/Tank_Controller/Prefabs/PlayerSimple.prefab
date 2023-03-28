@@ -614,7 +614,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1834984911}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.015, z: 0}
+  m_LocalPosition: {x: 0, y: -0.015, z: -0.025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -795,8 +795,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355be5cb14dbb6d4f8910f02faa80d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReticlePrefab: {fileID: 0}
+  ReticlePrefab: {fileID: 6586675285179966162, guid: 635caa08d23c64456ae58ba5035e3ee0,
+    type: 3}
   TreadCheck: {fileID: 1834984912}
+  GunPivotHorizontal: {fileID: 719555186414286152}
+  GunPivotVertical: {fileID: 0}
   stats: {fileID: 11400000, guid: 63782af51c1a24bbebe642eb8548af27, type: 2}
 --- !u!54 &719555187020098098
 Rigidbody:
@@ -913,6 +916,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7cc2a9cde52b444e86a57aacc04162a, type: 3}
+--- !u!4 &719555186414286152 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5597907162936272783, guid: f7cc2a9cde52b444e86a57aacc04162a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4923451745627869895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &719555186455999056 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5597907162896720023, guid: f7cc2a9cde52b444e86a57aacc04162a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4923451745627869895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1520845618
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719555186455999056}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 77648ae7724524b87afbbd11b86bf172, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!4 &719555186455999057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5597907162896720022, guid: f7cc2a9cde52b444e86a57aacc04162a,

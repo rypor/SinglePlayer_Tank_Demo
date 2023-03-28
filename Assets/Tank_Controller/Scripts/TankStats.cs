@@ -14,13 +14,20 @@ public class TankStats : ScriptableObject
 
     public float InputDeadzone = 0.1f;
 
-    public float MaxSpeed;
-    public float Acceleration;
-    public float Decceleration;
+    public float MaxSpeed = 10f;
+    public float Acceleration = 2f;
+    public float Decceleration = 2f;
 
-    public float RotMaxSpeed;
-    public float RotAcceleration;
-    public float RotDecceleration;
+    public float RotMaxSpeed = 180f;
+    public float RotAcceleration = 4f;
+    public float RotDecceleration = 5f;
+
+    [Header("Firing")]
+    public float MaxGunRange = 15f;
+    public float GunRotateSpeed = 3f;
+
+    public float BulletSpeed = 10f;
+    public float BulletGravity = 5f;
 
     [Header("Grounding")]
     public Vector3 GroundingCheckSize;

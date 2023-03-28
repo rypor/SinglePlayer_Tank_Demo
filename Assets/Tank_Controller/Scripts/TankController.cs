@@ -16,6 +16,10 @@ namespace INoodleI
         [Header("Grounding")]
         public Transform TreadCheck;
 
+        [Header("Gun References")]
+        public Transform GunPivotHorizontal;
+        public Transform GunPivotVertical;
+
         private InputData inputData;
         private Rigidbody rb;
         private TankInput input;
@@ -25,6 +29,9 @@ namespace INoodleI
 
         private float _speed;
         private float _rotSpeed;
+
+        private float _targetGunAngle;
+        private Vector3 _targetLookDir;
 
         private bool MoveInputPressed => (Mathf.Abs(inputData.Movement.y) > stats.InputDeadzone);
         private bool TurnInputPressed => (Mathf.Abs(inputData.Movement.x) > stats.InputDeadzone);
@@ -62,7 +69,8 @@ namespace INoodleI
                 _grounded = CheckGrounding(TreadCheck);
                 CollectInput();
                 ApplyMovement();
-                PositionReticle();
+
+                UpdateGun();
             }
             else
             {
@@ -108,18 +116,25 @@ namespace INoodleI
             }
         }
 
-        private void PositionReticle()
+        private void UpdateGun()
         {
             if(inputData.ReticlePosition != Vector3.negativeInfinity)
             {
+                // Adjust Reticle Position
                 reticle.gameObject.SetActive(true);
                 reticle.position = inputData.ReticlePosition;
                 reticle.up = inputData.ReticleNormal;
+
+                // Update Gun Target Position to new Reticle direction
+                _targetLookDir = (reticle.position - rb.position);
+                _targetLookDir.y = 0;
             }
             else
             {
                 reticle.gameObject.SetActive(false);
             }
+
+            GunPivotHorizontal.forward = Vector3.Slerp(GunPivotHorizontal.forward, _targetLookDir, stats.GunRotateSpeed * Time.fixedDeltaTime);
         }
 
         #endregion
