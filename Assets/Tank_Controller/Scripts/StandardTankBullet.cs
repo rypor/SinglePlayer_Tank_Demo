@@ -23,6 +23,11 @@ public class StandardTankBullet : MonoBehaviour, ITankBullet
         selfPoolableObject = GetComponent<IPoolableObject>();
     }
 
+    private void FixedUpdate()
+    {
+        rb.velocity += Vector3.up * selfGravity * Time.fixedDeltaTime;
+    }
+
     #endregion
 
     #region Public Custom Methods
@@ -46,6 +51,16 @@ public class StandardTankBullet : MonoBehaviour, ITankBullet
         float travelTime = flatDist / flatSpeed;
 
         // Calculate Initial Y Velocity for the bullet
+        // y=y_0 + v_0*t + 0.5*g*t^2
+        // y - y_0 - 0.5*g*t^2 = v_0*t
+        // (y-y_0-0.5*g*t^2)/t = v_0
+
+        float bulletYVel = (bulletInfo.BulletTarget.y - rb.position.y - 0.5f * selfGravity * travelTime * travelTime) / travelTime;
+        Debug.Log("Firing Bullet with :" + bulletYVel + " y vel.");
+
+        Vector3 velocity = dir.normalized * flatSpeed;
+        velocity.y = bulletYVel;
+        rb.velocity = velocity;
     }
 
     private void OnTriggerEnter(Collider other)
