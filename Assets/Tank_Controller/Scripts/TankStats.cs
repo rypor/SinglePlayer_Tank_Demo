@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TankStats", menuName ="Tank/Stats")]
+[CreateAssetMenu(fileName = "TankStats", menuName ="Tank/TankStats")]
 public class TankStats : ScriptableObject
 {
     [Header("LayerMasks")]
@@ -21,12 +21,6 @@ public class TankStats : ScriptableObject
     public float RotMaxSpeed = 180f;
     public float RotAcceleration = 4f;
     public float RotDecceleration = 5f;
-
-    [Header("Firing")]
-    public float MaxGunRange = 15f;
-    public float GunRotateSpeed = 3f;
-
-    public float FiringDelay = 0.7f;
 
     [Header("Grounding")]
     public Vector3 GroundingCheckSize;

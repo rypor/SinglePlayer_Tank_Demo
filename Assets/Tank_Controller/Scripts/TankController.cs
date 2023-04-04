@@ -11,30 +11,20 @@ namespace INoodleI
         #region Variables
 
         [Header("Prefabs")]
-        public GameObject ReticlePrefab;
         [SerializeField] private PrefabEnum BulletEnum;
 
         [Header("Grounding")]
         public Transform TreadCheck;
 
-        [Header("Gun References")]
-        public Transform GunPivotHorizontal;
-        public Transform GunPivotVertical;
-        public Transform GunFirePoint;
-
         private InputData inputData;
         private Rigidbody rb;
         private TankInput input;
-        private Transform reticle;
 
         private bool _grounded;
 
         private float _speed;
         private float _rotSpeed;
 
-        private float _targetGunAngle;
-        private Vector3 _targetLookDir;
-        private Vector3 _target;
 
         private bool MoveInputPressed => (Mathf.Abs(inputData.Movement.y) > stats.InputDeadzone);
         private bool TurnInputPressed => (Mathf.Abs(inputData.Movement.x) > stats.InputDeadzone);
@@ -53,30 +43,6 @@ namespace INoodleI
             input = GetComponent<TankInput>();
 
             rb.centerOfMass = stats.CenterOfMass;
-            
-            if(ReticlePrefab)
-            {
-                reticle = Instantiate(ReticlePrefab, Vector3.zero, Quaternion.identity).transform;
-            }
-            else
-            {
-                Debug.LogError(this+": Reticle Prefab not present");
-            }
-        }
-        private void Update()
-        {
-            if (input && stats && rb)
-            {
-                CollectInput();
-                ApplyMovement();
-
-                UpdateGun();
-                FireGun();
-            }
-            else
-            {
-                Debug.LogError("Tank Controller Error:  Input=" + input + ", Stats=" + stats+", Rb="+rb);
-            }
         }
 
         private void FixedUpdate()
@@ -85,6 +51,8 @@ namespace INoodleI
             {
                 // Update Grounding
                 _grounded = CheckGrounding(TreadCheck);
+                CollectInput();
+                ApplyMovement();
             }
             else
             {
@@ -127,40 +95,6 @@ namespace INoodleI
             else
             {
                 
-            }
-        }
-
-        private void UpdateGun()
-        {
-            if(inputData.ReticleHit)
-            {
-                // Adjust Reticle Position
-                reticle.gameObject.SetActive(true);
-                reticle.position = inputData.ReticlePosition;
-                reticle.up = inputData.ReticleNormal;
-
-                // Update Gun Target Position to new Reticle direction
-                _targetLookDir = (reticle.position - rb.position);
-                _targetLookDir.y = 0;
-
-                _target = inputData.ReticlePosition;
-            }
-            else
-            {
-                reticle.gameObject.SetActive(false);
-            }
-
-            GunPivotHorizontal.forward = Vector3.Slerp(GunPivotHorizontal.forward, _targetLookDir, stats.GunRotateSpeed * Time.fixedDeltaTime);
-        }
-
-        private void FireGun()
-        {
-            if(inputData.FirePressed)
-            {
-                ITankBullet bullet = ObjectPool.instance.RequestObject(BulletEnum, GunFirePoint.position, GunFirePoint.rotation, true).GameObject().GetComponent<ITankBullet>();
-                Debug.Log(bullet);
-                BulletInfo info = new BulletInfo() { BulletTarget = _target };
-                bullet.FireBullet(info);
             }
         }
 

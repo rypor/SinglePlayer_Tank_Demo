@@ -17,13 +17,13 @@ MonoBehaviour:
     m_Bits: 1024
   CenterOfMass: {x: 0, y: 0.05, z: 0}
   InputDeadzone: 0.1
-  MaxSpeed: 10
-  Acceleration: 2
+  MaxSpeed: 8
+  Acceleration: 1.5
   Decceleration: 2
-  RotMaxSpeed: 180
-  RotAcceleration: 4
-  RotDecceleration: 5
+  RotMaxSpeed: 200
+  RotAcceleration: 2
+  RotDecceleration: 3
+  MaxGunRange: 15
   GunRotateSpeed: 15
-  BulletSpeed: 10
-  BulletGravity: 5
+  FiringDelay: 0.7
   GroundingCheckSize: {x: 1.1, y: 0.025, z: 1.15}

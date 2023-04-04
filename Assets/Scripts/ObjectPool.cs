@@ -31,12 +31,9 @@ public class ObjectPool : MonoBehaviour
             return;
         }
         instance = this;
-    }
-
-    private void Start()
-    {
+        
         objectPoolDict = new Dictionary<PrefabEnum, List<IPoolableObject>>();
-        foreach(var prefab in prefabLinkDict.Keys)
+        foreach (var prefab in prefabLinkDict.Keys)
         {
             InitPrefabPool(prefab);
         }
@@ -67,6 +64,7 @@ public class ObjectPool : MonoBehaviour
 
     public void ReturnObject(IPoolableObject poolableObject)
     {
+        Debug.Log("Returning Object: " + poolableObject.GameObject());
         poolableObject.DisableObject();
         objectPoolDict[poolableObject.PrefabEnumValue].Add(poolableObject);
     }
@@ -79,11 +77,13 @@ public class ObjectPool : MonoBehaviour
     {
         List<IPoolableObject> pool = new List<IPoolableObject>();
 
-        for(int i=0; i<numInitPrefabs; i++)
+        for(int i=0; i<numInitPrefabs + 1; i++)
         {
             IPoolableObject poolableObject = CreatePoolableObject(prefabEnum);
             pool.Add(poolableObject);
         }
+        Destroy(pool[0].GameObject());
+        pool.RemoveAt(0);
         objectPoolDict.Add(prefabEnum, pool);
     }
 
@@ -92,6 +92,11 @@ public class ObjectPool : MonoBehaviour
     {
         GameObject g = prefabLinkDict[prefabEnum];
         IPoolableObject poolableObject = Instantiate(g, Vector3.zero, Quaternion.identity).GetComponent<IPoolableObject>();
+        if(poolableObject.Equals(null))
+        {
+            Debug.LogError(prefabEnum + " Prefab does not contain IPoolableObject Script!");
+            return null;
+        }
         poolableObject.DisableObject();
         poolableObject.PrefabEnumValue = prefabEnum;
 
@@ -109,4 +114,5 @@ public class ObjectPool : MonoBehaviour
 public enum PrefabEnum
 {
     StandardTankBullet,
+    StandardReticle,
 }
