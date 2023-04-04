@@ -11,10 +11,11 @@ public class ObjectPool : MonoBehaviour
     public static ObjectPool instance;
 
 
+    [SerializeField] private int numInitPrefabs = 10;
+
     [SerializeField] private PrefabObjectDictionary prefabLinkDict;
     private Dictionary<PrefabEnum, List<IPoolableObject>> objectPoolDict;
 
-    [SerializeField] private int numInitPrefabs = 10;
 
     #endregion
 

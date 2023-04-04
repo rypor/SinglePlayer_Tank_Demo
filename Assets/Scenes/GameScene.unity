@@ -818,10 +818,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5163862d64b55a4d9be7fb73398d18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabLinkDict:
-    m_keys: 
-    m_values: []
   numInitPrefabs: 10
+  prefabLinkDict:
+    m_keys: 00000000
+    m_values:
+    - {fileID: 9047621981249345141, guid: 0c84142d4c582fe4a99b9cfea971b632, type: 3}
 --- !u!1 &2020581473
 GameObject:
   m_ObjectHideFlags: 0
