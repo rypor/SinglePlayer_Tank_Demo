@@ -11,7 +11,6 @@ public class SimplePoolObject : MonoBehaviour, IPoolableObject
 
     #endregion
 
-
     #region IPoolableObject Methods
 
     public PrefabEnum PrefabEnumValue { get => prefabEnumValue; set => prefabEnumValue = value; }

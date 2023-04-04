@@ -106,5 +106,5 @@ public class ObjectPool : MonoBehaviour
 
 public enum PrefabEnum
 {
-    TankBullet,
+    StandardTankBullet,
 }
