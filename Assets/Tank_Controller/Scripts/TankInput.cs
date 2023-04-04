@@ -71,10 +71,10 @@ namespace INoodleI
                 movementInput.x++;
 
             // Fire Bullet Input
-            fireBullet = Input.GetKey(KeyCode.Mouse0);
+            fireBullet = Input.GetKeyDown(KeyCode.Mouse0);
 
             // Plant Mine Input
-            plantMine = Input.GetKey(KeyCode.Mouse1);
+            plantMine = Input.GetKeyDown(KeyCode.Mouse1);
 
             // Mouse Target Input
             Ray screenRay = cam.ScreenPointToRay(Input.mousePosition);

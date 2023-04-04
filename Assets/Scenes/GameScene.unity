@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &11965752 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 719555186414286152, guid: d1faaf30ea6b24da78bc2178565b3601,
+    type: 3}
+  m_PrefabInstance: {fileID: 719555187418181984}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &14429437
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,6 +653,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1358362611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1358362612}
+  m_Layer: 6
+  m_Name: Fire Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1358362612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358362611}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.67}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1624463438}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1571873240
 GameObject:
   m_ObjectHideFlags: 3
@@ -774,6 +811,12 @@ Transform:
   m_Father: {fileID: 1102055859}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1624463438 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 719555186525376678, guid: d1faaf30ea6b24da78bc2178565b3601,
+    type: 3}
+  m_PrefabInstance: {fileID: 719555187418181984}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2002705490
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +984,7 @@ PrefabInstance:
     - target: {fileID: 719555186525376678, guid: d1faaf30ea6b24da78bc2178565b3601,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.066
+      value: 1.102
       objectReference: {fileID: 0}
     - target: {fileID: 719555186693534322, guid: d1faaf30ea6b24da78bc2178565b3601,
         type: 3}
@@ -1018,6 +1061,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 719555187020098096, guid: d1faaf30ea6b24da78bc2178565b3601,
+        type: 3}
+      propertyPath: GunFirePoint
+      value: 
+      objectReference: {fileID: 1358362612}
+    - target: {fileID: 719555187020098096, guid: d1faaf30ea6b24da78bc2178565b3601,
+        type: 3}
+      propertyPath: GunPivotVertical
+      value: 
+      objectReference: {fileID: 11965752}
     - target: {fileID: 719555187377401773, guid: d1faaf30ea6b24da78bc2178565b3601,
         type: 3}
       propertyPath: m_LocalPosition.z

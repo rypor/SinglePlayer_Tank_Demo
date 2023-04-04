@@ -12,6 +12,7 @@ namespace INoodleI
 
         [Header("Prefabs")]
         public GameObject ReticlePrefab;
+        [SerializeField] private PrefabEnum BulletEnum;
 
         [Header("Grounding")]
         public Transform TreadCheck;
@@ -19,6 +20,7 @@ namespace INoodleI
         [Header("Gun References")]
         public Transform GunPivotHorizontal;
         public Transform GunPivotVertical;
+        public Transform GunFirePoint;
 
         private InputData inputData;
         private Rigidbody rb;
@@ -32,6 +34,7 @@ namespace INoodleI
 
         private float _targetGunAngle;
         private Vector3 _targetLookDir;
+        private Vector3 _target;
 
         private bool MoveInputPressed => (Mathf.Abs(inputData.Movement.y) > stats.InputDeadzone);
         private bool TurnInputPressed => (Mathf.Abs(inputData.Movement.x) > stats.InputDeadzone);
@@ -60,6 +63,21 @@ namespace INoodleI
                 Debug.LogError(this+": Reticle Prefab not present");
             }
         }
+        private void Update()
+        {
+            if (input && stats && rb)
+            {
+                CollectInput();
+                ApplyMovement();
+
+                UpdateGun();
+                FireGun();
+            }
+            else
+            {
+                Debug.LogError("Tank Controller Error:  Input=" + input + ", Stats=" + stats+", Rb="+rb);
+            }
+        }
 
         private void FixedUpdate()
         {
@@ -67,10 +85,6 @@ namespace INoodleI
             {
                 // Update Grounding
                 _grounded = CheckGrounding(TreadCheck);
-                CollectInput();
-                ApplyMovement();
-
-                UpdateGun();
             }
             else
             {
@@ -118,7 +132,7 @@ namespace INoodleI
 
         private void UpdateGun()
         {
-            if(inputData.ReticlePosition != Vector3.negativeInfinity)
+            if(inputData.ReticleHit)
             {
                 // Adjust Reticle Position
                 reticle.gameObject.SetActive(true);
@@ -128,6 +142,8 @@ namespace INoodleI
                 // Update Gun Target Position to new Reticle direction
                 _targetLookDir = (reticle.position - rb.position);
                 _targetLookDir.y = 0;
+
+                _target = inputData.ReticlePosition;
             }
             else
             {
@@ -135,6 +151,17 @@ namespace INoodleI
             }
 
             GunPivotHorizontal.forward = Vector3.Slerp(GunPivotHorizontal.forward, _targetLookDir, stats.GunRotateSpeed * Time.fixedDeltaTime);
+        }
+
+        private void FireGun()
+        {
+            if(inputData.FirePressed)
+            {
+                ITankBullet bullet = ObjectPool.instance.RequestObject(BulletEnum, GunFirePoint.position, GunFirePoint.rotation, true).GameObject().GetComponent<ITankBullet>();
+                Debug.Log(bullet);
+                BulletInfo info = new BulletInfo() { BulletTarget = _target };
+                bullet.FireBullet(info);
+            }
         }
 
         #endregion

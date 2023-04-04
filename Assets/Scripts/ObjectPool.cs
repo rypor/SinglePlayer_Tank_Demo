@@ -35,6 +35,7 @@ public class ObjectPool : MonoBehaviour
 
     private void Start()
     {
+        objectPoolDict = new Dictionary<PrefabEnum, List<IPoolableObject>>();
         foreach(var prefab in prefabLinkDict.Keys)
         {
             InitPrefabPool(prefab);
@@ -49,7 +50,7 @@ public class ObjectPool : MonoBehaviour
     // FORCE CREATION ON POOL EMPTY NOT IMPLEMENTED
     public IPoolableObject RequestObject(PrefabEnum prefabEnum, Vector3 pos, Quaternion rot, bool forceCreationOnPoolEmpty)
     {
-        List<IPoolableObject> pool = new List<IPoolableObject>();
+        List<IPoolableObject> pool = objectPoolDict[prefabEnum];
 
         if (pool.Count > 0)
         {
@@ -76,13 +77,14 @@ public class ObjectPool : MonoBehaviour
 
     private void InitPrefabPool(PrefabEnum prefabEnum)
     {
-        List<IPoolableObject> list = new List<IPoolableObject>();
+        List<IPoolableObject> pool = new List<IPoolableObject>();
 
         for(int i=0; i<numInitPrefabs; i++)
         {
             IPoolableObject poolableObject = CreatePoolableObject(prefabEnum);
-            list.Add(poolableObject);
+            pool.Add(poolableObject);
         }
+        objectPoolDict.Add(prefabEnum, pool);
     }
 
     // Creates Disabled instance of prefabEnum

@@ -26,8 +26,7 @@ public class TankStats : ScriptableObject
     public float MaxGunRange = 15f;
     public float GunRotateSpeed = 3f;
 
-    public float BulletSpeed = 10f;
-    public float BulletGravity = 5f;
+    public float FiringDelay = 0.7f;
 
     [Header("Grounding")]
     public Vector3 GroundingCheckSize;

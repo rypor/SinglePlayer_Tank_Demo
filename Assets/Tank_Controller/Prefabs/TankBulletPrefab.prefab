@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 9047621981249345140}
   - component: {fileID: 9047621981249345143}
   - component: {fileID: 9047621981249345142}
-  m_Layer: 0
+  - component: {fileID: 381166352010570570}
+  m_Layer: 8
   m_Name: TankBulletPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,6 +63,21 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &381166352010570570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9047621981249345141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f4598274818a004fb646f6711c248e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flatSpeed: 4
+  selfGravity: -5
+  rb: {fileID: 9047621981249345142}
 --- !u!1 &9047621981473959563
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +90,7 @@ GameObject:
   - component: {fileID: 9047621981473959559}
   - component: {fileID: 9047621981473959556}
   - component: {fileID: 9047621981473959557}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +106,7 @@ Transform:
   m_GameObject: {fileID: 9047621981473959563}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25754, y: 0.25754, z: 0.25754}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9047621981249345140}
@@ -155,7 +171,7 @@ SphereCollider:
   m_GameObject: {fileID: 9047621981473959563}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}

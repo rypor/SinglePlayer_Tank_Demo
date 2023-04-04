@@ -23,9 +23,9 @@ public class SimplePoolObject : MonoBehaviour, IPoolableObject
 
     public IPoolableObject EnableObject(Vector3 pos, Quaternion rot)
     {
-        gameObject.SetActive(true);
         gameObject.transform.position = pos;
         gameObject.transform.rotation = rot;
+        gameObject.SetActive(true);
 
         return this;
     }
