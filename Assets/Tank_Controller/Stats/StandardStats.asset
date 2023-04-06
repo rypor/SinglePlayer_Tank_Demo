@@ -23,7 +23,4 @@ MonoBehaviour:
   RotMaxSpeed: 200
   RotAcceleration: 2
   RotDecceleration: 3
-  MaxGunRange: 15
-  GunRotateSpeed: 15
-  FiringDelay: 0.7
-  GroundingCheckSize: {x: 1.1, y: 0.025, z: 1.15}
+  GroundingCheckSize: {x: 1.2, y: 0.025, z: 1.22}
