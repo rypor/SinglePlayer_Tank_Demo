@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab99b537bf25ea4a8e6eb5d028f683f, type: 3}
   m_Name: StandardFireStats
   m_EditorClassIdentifier: 
-  BulletEnum: 0
-  ReticleEnum: 1
+  BulletEnum: 1
+  ReticleEnum: 0
   MaxVertAngle: 50
   MaxGunRange: 15
   GunRotateSpeed: 10
   FiringDelay: 0.7
-  FlatSpeed: 6
-  SelfGravity: -8
+  FlatSpeed: 8
+  SelfGravity: -9
   MaxReasonableLife: 30
+  ExplosionRange: 10
+  ExplosionPower: 20

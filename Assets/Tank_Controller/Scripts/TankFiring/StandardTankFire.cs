@@ -93,7 +93,7 @@ public class StandardTankFire : MonoBehaviour
         if (_bufferFire)
         {
             ITankBullet bullet = ObjectPool.instance.RequestObject(stats.BulletEnum, GunFirePoint.position, GunFirePoint.rotation, true).GameObject().GetComponent<ITankBullet>();
-            BulletInfo info = new BulletInfo() { vel = vel, selfGravity = stats.SelfGravity};
+            BulletInfo info = new BulletInfo() { Vel = vel, SelfGravity = stats.SelfGravity, ExplosionRange = stats.ExplosionRange, ExplosionPower = stats.ExplosionPower};
             bullet.FireBullet(info);
             _bufferFire = false;
         }

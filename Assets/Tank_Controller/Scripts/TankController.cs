@@ -15,16 +15,18 @@ namespace INoodleI
 
         [Header("Grounding")]
         public Transform TreadCheck;
+        public List<Transform> SlopeCheckPoints;
 
         private InputData inputData;
         private Rigidbody rb;
         private TankInput input;
 
         private bool _grounded;
+        private Vector3 _avgGroundNorm;
+        private float _groundAngleFromFlat;
 
         private float _treadSpeed;
         private float _treadRotSpeed;
-
 
         private bool MoveInputPressed => (Mathf.Abs(inputData.Movement.y) > stats.InputDeadzone);
         private bool TurnInputPressed => (Mathf.Abs(inputData.Movement.x) > stats.InputDeadzone);
@@ -51,6 +53,8 @@ namespace INoodleI
             {
                 // Update Grounding
                 _grounded = CheckGrounding(TreadCheck);
+                if (_grounded) FindAverageGroundSlope();
+
                 CollectInput();
                 CalculateMovement();
             }
@@ -67,6 +71,27 @@ namespace INoodleI
         private bool CheckGrounding(Transform t)
         {
             return Physics.CheckBox(t.position, stats.GroundingCheckSize, t.rotation, stats.GroundMask);
+        }
+
+        private void FindAverageGroundSlope()
+        {
+            int count = 0;
+            Vector3 avgNorm = Vector3.zero;
+
+            RaycastHit hit;
+            foreach (Transform point in SlopeCheckPoints)
+            {
+                if (Physics.Raycast(point.position, Vector3.down, out hit, stats.GroundingCheckSize.y * 2, stats.GroundMask))
+                {
+                    avgNorm += hit.normal;
+                    count++;
+                }
+            }
+            
+            _avgGroundNorm = (count == 0)? Vector3.zero : avgNorm / count;
+            _groundAngleFromFlat = Vector3.Angle(_avgGroundNorm, Vector3.up);
+
+            Debug.Log("AGN: "+_avgGroundNorm+",   angle: "+_groundAngleFromFlat);
         }
 
         private void CollectInput()
@@ -90,7 +115,6 @@ namespace INoodleI
 
                 rb.MoveRotation(rb.rotation * Quaternion.Euler(new Vector3(0, _treadRotSpeed * Time.fixedDeltaTime, 0)));
                 rb.MovePosition(rb.position + rb.rotation * Vector3.forward * _treadSpeed * Time.fixedDeltaTime);
-
             }
             // Air Movement Influence Logic
             else
@@ -104,19 +128,46 @@ namespace INoodleI
 
         #region Debug
 
+        [Header("Debug Toggles")]
+        public bool DebugTreadBox = false;
+        public bool DebugCenterOfMass = false;
+        public bool DebugSlopeCheck = false;
+
         private void OnDrawGizmos()
         {
             //Debug Ground Check Box
-            Gizmos.color = Color.red;
-            if(_grounded)
-                Gizmos.color = Color.green;
-            if(TreadCheck)
-                DrawGizmoRect(TreadCheck.position, stats.GroundingCheckSize, TreadCheck.rotation);
+            if (DebugTreadBox)
+            {
+                Gizmos.color = Color.red;
+                if (_grounded)
+                    Gizmos.color = Color.green;
+                if (TreadCheck)
+                    DrawGizmoRect(TreadCheck.position, stats.GroundingCheckSize, TreadCheck.rotation);
+            }
 
             // Center Of Mass
-            Gizmos.color = Color.red;
-            if(stats && rb)
-                Gizmos.DrawWireSphere(stats.CenterOfMass + rb.position, 0.2f);
+            if (DebugCenterOfMass)
+            {
+                Gizmos.color = Color.red;
+                if (stats && rb)
+                    Gizmos.DrawSphere(stats.CenterOfMass + rb.position, 0.1f);
+            }
+
+            // Slope Check
+            if (DebugSlopeCheck)
+            {
+                RaycastHit hit;
+                foreach (Transform point in SlopeCheckPoints)
+                {
+                    Gizmos.color = Color.red;
+                    Vector3 center = point.position + Vector3.down * stats.GroundingCheckSize.y * 2;
+                    if (Physics.Raycast(point.position, Vector3.down, out hit, stats.GroundingCheckSize.y * 2, stats.GroundMask))
+                    {
+                        Gizmos.color = Color.green;
+                        center = hit.point;
+                    }
+                }
+            }
         }
 
         private void DrawGizmoRect(Vector3 center, Vector3 size, Quaternion rot)

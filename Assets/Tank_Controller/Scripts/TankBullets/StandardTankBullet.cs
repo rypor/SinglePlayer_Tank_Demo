@@ -22,7 +22,7 @@ public class StandardTankBullet : MonoBehaviour, ITankBullet
 
     private void FixedUpdate()
     {
-        rb.velocity += Vector3.up * bulletInfo.selfGravity * Time.fixedDeltaTime;
+        rb.velocity += Vector3.up * bulletInfo.SelfGravity * Time.fixedDeltaTime;
     }
 
     #endregion
@@ -36,7 +36,7 @@ public class StandardTankBullet : MonoBehaviour, ITankBullet
     public void FireBullet(BulletInfo bulletInfo)
     {
         this.bulletInfo = bulletInfo;
-        rb.velocity = bulletInfo.vel;
+        rb.velocity = bulletInfo.Vel;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,7 +44,8 @@ public class StandardTankBullet : MonoBehaviour, ITankBullet
         if (!gameObject.activeSelf)
             return;
         Debug.Log(gameObject + " has hit: " + other.gameObject);
-        ObjectPool.instance.ReturnObject(selfPoolableObject);
+        ExplosionManager.instance.SpawnExplosion(rb.position, bulletInfo.ExplosionRange, bulletInfo.ExplosionPower);
+        selfPoolableObject.DisableObject();
     }
 
     #endregion
@@ -57,6 +58,9 @@ public interface ITankBullet
 
 public struct BulletInfo
 {
-    public Vector3 vel;
-    public float selfGravity;
+    public Vector3 Vel;
+    public float SelfGravity;
+
+    public float ExplosionRange;
+    public float ExplosionPower;
 }

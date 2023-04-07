@@ -58,13 +58,14 @@ public class ObjectPool : MonoBehaviour
         }
 
         //  If the object pool is empty
-        return CreatePoolableObject(prefabEnum).EnableObject(pos, rot);
+        return CreatePoolableObjectDisabled(prefabEnum).EnableObject(pos, rot);
     }
 
     public void ReturnObject(IPoolableObject poolableObject)
     {
         Debug.Log("Returning Object: " + poolableObject.GameObject());
-        poolableObject.DisableObject();
+        if(poolableObject.Active)
+            poolableObject.DisableObject();
         objectPoolDict[poolableObject.PrefabEnumValue].Add(poolableObject);
     }
 
@@ -75,20 +76,18 @@ public class ObjectPool : MonoBehaviour
     private void InitPrefabPool(PrefabEnum prefabEnum)
     {
         List<IPoolableObject> pool = new List<IPoolableObject>();
-
-        for(int i=0; i<numInitPrefabs + 1; i++)
-        {
-            IPoolableObject poolableObject = CreatePoolableObject(prefabEnum);
-            pool.Add(poolableObject);
-        }
-        Destroy(pool[0].GameObject());
-        pool.RemoveAt(0);
         objectPoolDict.Add(prefabEnum, pool);
+
+        for (int i=0; i<numInitPrefabs; i++)
+        {
+            CreatePoolableObjectDisabled(prefabEnum);
+        }
     }
 
     // Creates Disabled instance of prefabEnum
-    private IPoolableObject CreatePoolableObject(PrefabEnum prefabEnum)
+    private IPoolableObject CreatePoolableObjectDisabled(PrefabEnum prefabEnum)
     {
+        Debug.Log(prefabEnum);
         GameObject g = prefabLinkDict[prefabEnum];
         IPoolableObject poolableObject = Instantiate(g, Vector3.zero, Quaternion.identity).GetComponent<IPoolableObject>();
         if(poolableObject.Equals(null))
@@ -96,8 +95,8 @@ public class ObjectPool : MonoBehaviour
             Debug.LogError(prefabEnum + " Prefab does not contain IPoolableObject Script!");
             return null;
         }
-        poolableObject.DisableObject();
         poolableObject.PrefabEnumValue = prefabEnum;
+        poolableObject.DisableObject();
 
         return poolableObject;
     }
@@ -112,6 +111,7 @@ public class ObjectPool : MonoBehaviour
 
 public enum PrefabEnum
 {
-    StandardTankBullet,
     StandardReticle,
+    StandardTankBullet,
+    ExplosionGraphic_1,
 }

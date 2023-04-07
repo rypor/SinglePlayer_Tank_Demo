@@ -20,4 +20,8 @@ public class StandardTankFireStats : ScriptableObject
     public float FlatSpeed = 6;
     public float SelfGravity = -10;
     public float MaxReasonableLife = 30;
+
+    [Header("Explosion Properties")]
+    public float ExplosionRange = 10f;
+    public float ExplosionPower = 20f;
 }

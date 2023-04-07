@@ -24,5 +24,6 @@ public class TankStats : ScriptableObject
 
     [Header("Grounding")]
     public Vector3 GroundingCheckSize;
-
+    public float MaxGroundAngle = 35;
+    public float MaxFullSpeedGroundAngle = 25;
 }
