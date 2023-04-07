@@ -22,14 +22,14 @@ namespace INoodleI
 
         private bool _grounded;
 
-        private float _speed;
-        private float _rotSpeed;
+        private float _treadSpeed;
+        private float _treadRotSpeed;
 
 
         private bool MoveInputPressed => (Mathf.Abs(inputData.Movement.y) > stats.InputDeadzone);
         private bool TurnInputPressed => (Mathf.Abs(inputData.Movement.x) > stats.InputDeadzone);
-        private bool ChangeMoveDir => MoveInputPressed && (Mathf.Abs(_speed) > 0.05f && Mathf.Sign(_speed) != Mathf.Sign(inputData.Movement.y));
-        private bool ChangeTurnDir => TurnInputPressed && (Mathf.Abs(_rotSpeed) > 0.05f && Mathf.Sign(_rotSpeed) != Mathf.Sign(inputData.Movement.x));
+        private bool ChangeMoveDir => MoveInputPressed && (Mathf.Abs(_treadSpeed) > 0.05f && Mathf.Sign(_treadSpeed) != Mathf.Sign(inputData.Movement.y));
+        private bool ChangeTurnDir => TurnInputPressed && (Mathf.Abs(_treadRotSpeed) > 0.05f && Mathf.Sign(_treadRotSpeed) != Mathf.Sign(inputData.Movement.x));
         
         [SerializeField] private TankStats stats;
 
@@ -52,7 +52,7 @@ namespace INoodleI
                 // Update Grounding
                 _grounded = CheckGrounding(TreadCheck);
                 CollectInput();
-                ApplyMovement();
+                CalculateMovement();
             }
             else
             {
@@ -74,7 +74,7 @@ namespace INoodleI
             inputData = input.InputData;
         }
 
-        private void ApplyMovement()
+        private void CalculateMovement()
         {
             // Ground Movement Logic
             if(_grounded)
@@ -85,16 +85,18 @@ namespace INoodleI
                 float accel = (MoveInputPressed)? ( (ChangeMoveDir)? stats.Decceleration :stats.Acceleration ) : stats.Decceleration;
                 float rotAccel = (TurnInputPressed)? ( (ChangeTurnDir)? stats.RotDecceleration :stats.RotAcceleration ) : stats.RotDecceleration;
 
-                _speed = Mathf.Lerp(_speed, targetMoveSpd, accel * Time.fixedDeltaTime);
-                _rotSpeed = Mathf.Lerp(_rotSpeed, targetRotSpd, rotAccel * Time.fixedDeltaTime);
+                _treadSpeed = Mathf.Lerp(_treadSpeed, targetMoveSpd, accel * Time.fixedDeltaTime);
+                _treadRotSpeed = Mathf.Lerp(_treadRotSpeed, targetRotSpd, rotAccel * Time.fixedDeltaTime);
 
-                rb.MoveRotation(rb.rotation * Quaternion.Euler(new Vector3(0, _rotSpeed * Time.fixedDeltaTime, 0)));
-                rb.MovePosition(rb.position + rb.rotation * Vector3.forward * _speed * Time.fixedDeltaTime);
+                rb.MoveRotation(rb.rotation * Quaternion.Euler(new Vector3(0, _treadRotSpeed * Time.fixedDeltaTime, 0)));
+                rb.MovePosition(rb.position + rb.rotation * Vector3.forward * _treadSpeed * Time.fixedDeltaTime);
+
             }
             // Air Movement Influence Logic
             else
             {
-                
+                rb.MovePosition(rb.position + rb.rotation * Vector3.forward * _treadSpeed * Time.fixedDeltaTime);
+                rb.MoveRotation(rb.rotation * Quaternion.Euler(new Vector3(0, _treadRotSpeed * Time.fixedDeltaTime, 0)));
             }
         }
 

@@ -100,10 +100,8 @@ public class StandardTankFire : MonoBehaviour
     }
     private void UpdateGunVert(Vector3 vel)
     {
-        Debug.Log(vel);
         float riseOverRun = vel.y / new Vector2(vel.x, vel.z).magnitude;
         float targetAngle = Mathf.Clamp(-Mathf.Atan(riseOverRun) * 180/Mathf.PI, -stats.MaxVertAngle, stats.MaxVertAngle);
-        Debug.Log(vel + " : " + targetAngle);
         GunPivotVertical.localRotation = Quaternion.Lerp(GunPivotVertical.localRotation, Quaternion.Euler(new Vector3(targetAngle, 0, 0)), stats.GunRotateSpeed * Time.fixedDeltaTime);
     }
     private Vector3 CalculateBulletTrajectory(Vector3 startPoint)
@@ -126,7 +124,6 @@ public class StandardTankFire : MonoBehaviour
 
         Vector3 velocity = dir.normalized * stats.FlatSpeed;
         velocity.y = bulletYVel;
-        Debug.Log("dir = " + dir + ", fdist: "+flatDist+", tTime: "+travelTime);
 
         return velocity;
     }

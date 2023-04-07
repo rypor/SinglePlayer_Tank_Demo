@@ -17,8 +17,8 @@ MonoBehaviour:
     m_Bits: 1024
   CenterOfMass: {x: 0, y: 0.05, z: 0}
   InputDeadzone: 0.1
-  MaxSpeed: 8
-  Acceleration: 1.5
+  MaxSpeed: 15
+  Acceleration: 6
   Decceleration: 2
   RotMaxSpeed: 200
   RotAcceleration: 2

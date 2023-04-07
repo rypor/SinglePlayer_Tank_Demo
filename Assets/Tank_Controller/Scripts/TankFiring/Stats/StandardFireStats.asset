@@ -19,5 +19,5 @@ MonoBehaviour:
   GunRotateSpeed: 10
   FiringDelay: 0.7
   FlatSpeed: 6
-  SelfGravity: -9
+  SelfGravity: -8
   MaxReasonableLife: 30
