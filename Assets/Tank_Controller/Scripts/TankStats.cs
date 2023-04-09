@@ -26,4 +26,9 @@ public class TankStats : ScriptableObject
     public Vector3 GroundingCheckSize;
     public float MaxGroundAngle = 35;
     public float MaxFullSpeedGroundAngle = 25;
+
+    [Header("Slopes")]
+    public float MinSlopeAngle = 15f;
+    public float MaxSlopeAngle = 45f;
+    public float SlopeGravityModifier = 1f;
 }

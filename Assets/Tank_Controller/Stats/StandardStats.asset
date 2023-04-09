@@ -20,9 +20,12 @@ MonoBehaviour:
   MaxSpeed: 9
   Acceleration: 1.5
   Decceleration: 2
-  RotMaxSpeed: 180
-  RotAcceleration: 1.8
-  RotDecceleration: 2.2
+  RotMaxSpeed: 220
+  RotAcceleration: 2.2
+  RotDecceleration: 3
   GroundingCheckSize: {x: 1.2, y: 0.025, z: 1.22}
   MaxGroundAngle: 2
   MaxFullSpeedGroundAngle: 1
+  MinSlopeAngle: 25
+  MaxSlopeAngle: 45
+  SlopeGravityModifier: 1

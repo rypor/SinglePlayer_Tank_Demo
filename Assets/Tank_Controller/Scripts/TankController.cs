@@ -116,13 +116,14 @@ namespace INoodleI
                 if (Mathf.Abs(transform.forward.y * _treadSpeed) > 0.1)
                 {
                     float _angleFromFlat = Vector3.SignedAngle(transform.forward * _treadSpeed, new Vector3(transform.forward.x, 0, transform.forward.y), transform.right);
-                    if(_angleFromFlat > 0)
+                    if(_angleFromFlat > stats.MinSlopeAngle)
                     {
                         if(_angleFromFlat > 90) _angleFromFlat = 180 - _angleFromFlat;
-                        float stepIncrement = _angleFromFlat / 90 * Physics.gravity.y * Time.fixedDeltaTime;
+                        float stepIncrement = Mathf.Clamp01((_angleFromFlat - stats.MinSlopeAngle) / (stats.MaxSlopeAngle - stats.MinSlopeAngle))
+                            * Physics.gravity.y * stats.SlopeGravityModifier * Time.fixedDeltaTime;
+                        Debug.Log("_angleFromFlat: " + _angleFromFlat + ",  sInc: "+stepIncrement);
                         _treadSpeed = Utils.FloatStepWithIncrementTarget(_treadSpeed, 0, stepIncrement);
                     }
-                    Debug.Log("_angleFromFlat: " + _angleFromFlat);
                     //_treadSpeed += _angleFromFlat / 90 * Physics.gravity.y * Time.fixedDeltaTime;
                 }
 
