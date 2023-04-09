@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Utils
 {
-    public static float FloatStepWithIncrement(float currentVal, float targetVal, float increment)
+    public static float FloatStepWithIncrementTarget(float currentVal, float targetVal, float increment)
     {
         increment = Mathf.Abs(increment);
         if(currentVal > targetVal)

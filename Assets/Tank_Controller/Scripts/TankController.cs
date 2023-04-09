@@ -22,8 +22,8 @@ namespace INoodleI
         private TankInput input;
 
         private bool _grounded;
-        private Vector3 _avgGroundNorm;
-        private float _groundAngleFromFlat;
+        //private Vector3 _avgGroundNorm;
+        //private float _groundAngleFromFlat;
 
         private float _treadSpeed;
         private float _treadRotSpeed;
@@ -53,7 +53,7 @@ namespace INoodleI
             {
                 // Update Grounding
                 _grounded = CheckGrounding(TreadCheck);
-                if (_grounded) FindAverageGroundSlope();
+                //if (_grounded) FindAverageGroundSlope();
 
                 CollectInput();
                 CalculateMovement();
@@ -73,7 +73,8 @@ namespace INoodleI
             return Physics.CheckBox(t.position, stats.GroundingCheckSize, t.rotation, stats.GroundMask);
         }
 
-        private void FindAverageGroundSlope()
+        // Deprecated
+        /*private void FindAverageGroundSlope()
         {
             int count = 0;
             Vector3 avgNorm = Vector3.zero;
@@ -90,9 +91,7 @@ namespace INoodleI
             
             _avgGroundNorm = (count == 0)? Vector3.zero : avgNorm / count;
             _groundAngleFromFlat = Vector3.Angle(_avgGroundNorm, Vector3.up);
-
-            Debug.Log("AGN: "+_avgGroundNorm+",   angle: "+_groundAngleFromFlat);
-        }
+        }*/
 
         private void CollectInput()
         {
@@ -112,6 +111,20 @@ namespace INoodleI
 
                 _treadSpeed = Mathf.Lerp(_treadSpeed, targetMoveSpd, accel * Time.fixedDeltaTime);
                 _treadRotSpeed = Mathf.Lerp(_treadRotSpeed, targetRotSpd, rotAccel * Time.fixedDeltaTime);
+
+                // Reduce tank's ability to climb slopes. Only effective if tank is traveling uphill
+                if (Mathf.Abs(transform.forward.y * _treadSpeed) > 0.1)
+                {
+                    float _angleFromFlat = Vector3.SignedAngle(transform.forward * _treadSpeed, new Vector3(transform.forward.x, 0, transform.forward.y), transform.right);
+                    if(_angleFromFlat > 0)
+                    {
+                        if(_angleFromFlat > 90) _angleFromFlat = 180 - _angleFromFlat;
+                        float stepIncrement = _angleFromFlat / 90 * Physics.gravity.y * Time.fixedDeltaTime;
+                        _treadSpeed = Utils.FloatStepWithIncrementTarget(_treadSpeed, 0, stepIncrement);
+                    }
+                    Debug.Log("_angleFromFlat: " + _angleFromFlat);
+                    //_treadSpeed += _angleFromFlat / 90 * Physics.gravity.y * Time.fixedDeltaTime;
+                }
 
                 rb.MoveRotation(rb.rotation * Quaternion.Euler(new Vector3(0, _treadRotSpeed * Time.fixedDeltaTime, 0)));
                 rb.MovePosition(rb.position + rb.rotation * Vector3.forward * _treadSpeed * Time.fixedDeltaTime);
