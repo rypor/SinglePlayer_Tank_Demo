@@ -111,6 +111,8 @@ namespace INoodleI
 
                 _treadSpeed = Mathf.Lerp(_treadSpeed, targetMoveSpd, accel * Time.fixedDeltaTime);
                 _treadRotSpeed = Mathf.Lerp(_treadRotSpeed, targetRotSpd, rotAccel * Time.fixedDeltaTime);
+                //_treadSpeed = Utils.FloatStepWithIncrementTarget(_treadSpeed, targetMoveSpd, accel * Time.fixedDeltaTime);
+                //_treadRotSpeed = Utils.FloatStepWithIncrementTarget(_treadRotSpeed, targetRotSpd, rotAccel * Time.fixedDeltaTime);
 
                 // Reduce tank's ability to climb slopes. Only effective if tank is traveling uphill
                 if (Mathf.Abs(transform.forward.y * _treadSpeed) > 0.1)

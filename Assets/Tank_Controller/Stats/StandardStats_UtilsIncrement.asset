@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c820f388d7ce35b4e828a3e6935b6a26, type: 3}
-  m_Name: StandardStats
+  m_Name: StandardStats_UtilsIncrement
   m_EditorClassIdentifier: 
   GroundMask:
     serializedVersion: 2
@@ -18,14 +18,14 @@ MonoBehaviour:
   CenterOfMass: {x: 0, y: 0.05, z: 0}
   InputDeadzone: 0.1
   MaxSpeed: 9
-  Acceleration: 1.5
-  Decceleration: 2
-  RotMaxSpeed: 220
-  RotAcceleration: 2.2
-  RotDecceleration: 3
+  Acceleration: 9
+  Decceleration: 18
+  RotMaxSpeed: 180
+  RotAcceleration: 320
+  RotDecceleration: 530
   GroundingCheckSize: {x: 1.2, y: 0.025, z: 1.22}
   MaxGroundAngle: 2
   MaxFullSpeedGroundAngle: 1
-  MinSlopeAngle: 25
-  MaxSlopeAngle: 45
+  MinSlopeAngle: 20
+  MaxSlopeAngle: 60
   SlopeGravityModifier: 1

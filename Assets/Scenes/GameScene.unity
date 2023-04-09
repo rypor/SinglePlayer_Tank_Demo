@@ -267,7 +267,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162188142}
-  m_LocalRotation: {x: 0.45840535, y: 0.000000015292056, z: -0.000000007887498, w: 0.8887432}
+  m_LocalRotation: {x: 0.45840535, y: -0.000000015292056, z: 0.000000007887498, w: 0.8887432}
   m_LocalPosition: {x: 0, y: 28.124, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -430,7 +430,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.45840535, y: 0.000000015292056, z: -0.000000007887498, w: 0.8887432}
+  m_LocalRotation: {x: 0.45840535, y: -0.000000015292056, z: 0.000000007887498, w: 0.8887432}
   m_LocalPosition: {x: 0, y: 28.124, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2001,6 +2001,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 719555187020098096, guid: d1faaf30ea6b24da78bc2178565b3601,
         type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: afeb94f0f9cd56245bd4d6783d70efdd,
+        type: 2}
+    - target: {fileID: 719555187020098096, guid: d1faaf30ea6b24da78bc2178565b3601,
+        type: 3}
       propertyPath: GunFirePoint
       value: 
       objectReference: {fileID: 1358362612}
@@ -2045,5 +2051,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 13400000, guid: 69e63750a572d814e8c0521515f58bd6,
         type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 615031733, guid: d1faaf30ea6b24da78bc2178565b3601, type: 3}
+    - {fileID: 774268713, guid: d1faaf30ea6b24da78bc2178565b3601, type: 3}
+    - {fileID: 50123189, guid: d1faaf30ea6b24da78bc2178565b3601, type: 3}
+    - {fileID: 1129157143, guid: d1faaf30ea6b24da78bc2178565b3601, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d1faaf30ea6b24da78bc2178565b3601, type: 3}
