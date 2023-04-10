@@ -909,6 +909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioData:
   - {fileID: 11400000, guid: 033477022eb3b974a93743201fa7de4a, type: 2}
+  - {fileID: 11400000, guid: 6f820fa6531db71458ae144bcb4c2925, type: 2}
 --- !u!4 &708187610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3701499659852394445, guid: d1faaf30ea6b24da78bc2178565b3601,
@@ -1569,7 +1570,7 @@ MonoBehaviour:
   m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 0
-  m_FrequencyGain: 0
+  m_FrequencyGain: 2
   mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1581260216
 GameObject:

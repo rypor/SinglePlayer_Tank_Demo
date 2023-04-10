@@ -18,8 +18,12 @@ MonoBehaviour:
   MaxGunRange: 15
   GunRotateSpeed: 10
   FiringDelay: 0.7
+  FiringScreenShake_Duration: 0.1
+  FiringScreenShake_Intensity: 2
   FlatSpeed: 12
   SelfGravity: -12
   MaxReasonableLife: 30
-  ExplosionRange: 10
+  ExplosionRange: 5
   ExplosionPower: 20
+  ExplosionScreenShake_Duration: 0.3
+  ExplosionScreenShake_Intensity: 2

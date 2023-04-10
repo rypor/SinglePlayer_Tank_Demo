@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 [RequireComponent(typeof(IPoolableObject))]
@@ -45,6 +46,8 @@ public class StandardTankBullet : MonoBehaviour, ITankBullet
             return;
         Debug.Log(gameObject + " has hit: " + other.gameObject);
         ExplosionManager.instance.SpawnExplosion(rb.position, bulletInfo.ExplosionRange, bulletInfo.ExplosionPower);
+        AudioManager.instance.PlaySoundAtPoint(AudioTypeEnum.StandardExplosion, rb.position);
+        CameraManager.instance.StartScreenShake(bulletInfo.ExplosionScreenShake_Duration, bulletInfo.ExplosionScreenShake_Intensity);
         selfPoolableObject.DisableObject();
     }
 
@@ -63,4 +66,7 @@ public struct BulletInfo
 
     public float ExplosionRange;
     public float ExplosionPower;
+
+    public float ExplosionScreenShake_Duration;
+    public float ExplosionScreenShake_Intensity;
 }
