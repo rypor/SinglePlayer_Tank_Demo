@@ -51,7 +51,6 @@ public class CameraManager : MonoBehaviour
         while(duration > 0)
         {
             channelPerlin.m_AmplitudeGain -= (step*timeStep);
-            Debug.Log(channelPerlin.m_AmplitudeGain);
             duration -= timeStep * 2;
             yield return new WaitForSeconds(timeStep);
         }

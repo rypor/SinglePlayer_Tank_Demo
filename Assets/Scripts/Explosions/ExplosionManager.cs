@@ -24,22 +24,33 @@ public class ExplosionManager : MonoBehaviour
         instance = this;
     }
 
-    public void SpawnExplosion(Vector3 position, float range, float power)
+    public void SpawnExplosion(Vector3 position, float range, float power, float upwardsModifier)
     {
         if(!ObjectPool.instance)
         {
             Debug.LogError("Explosion Request: No ObjectPool Found");
             return;
         }
-        TriggerExplosion(position, range, power);
+        TriggerExplosion(position, range, power, upwardsModifier);
         HandleGraphics(position, range);
     }
 
-    private void TriggerExplosion(Vector3 position, float range, float power)
+    // Handles Explosion Physics
+    private void TriggerExplosion(Vector3 position, float range, float power, float upwardsModifier)
     {
-        int numHit = Physics.OverlapSphereNonAlloc(transform.position, range, results, ExplosionMask);
+        int numHit = Physics.OverlapSphereNonAlloc(position, range, results, ExplosionMask);
+        Debug.Log("nH: " + numHit);
+        for (int i = 0; i < numHit; i++)
+        {
+            Collider obj = results[i];
+            if (obj.attachedRigidbody == null)
+                continue;
+
+            obj.attachedRigidbody.AddExplosionForce(power, position, range, upwardsModifier, ForceMode.Impulse);
+        }
     }
 
+    // Handles Explosion Graphics
     private void HandleGraphics(Vector3 position, float range)
     {
         Transform graphic = ObjectPool.instance.RequestObject(ExplosionGraphics[Random.Range(0, ExplosionGraphics.Count)], position, Quaternion.identity, true)

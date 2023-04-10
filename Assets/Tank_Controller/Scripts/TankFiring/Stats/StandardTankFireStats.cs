@@ -27,6 +27,7 @@ public class StandardTankFireStats : ScriptableObject
     [Header("Explosion Properties")]
     public float ExplosionRange = 10f;
     public float ExplosionPower = 20f;
+    public float ExplosionUpwardsModifer = 1f;
     public float ExplosionScreenShake_Duration = 0.6f;
     public float ExplosionScreenShake_Intensity = 1.5f;
 }

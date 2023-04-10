@@ -873,7 +873,7 @@ GameObject:
   m_Component:
   - component: {fileID: 671702152}
   - component: {fileID: 671702153}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Audio Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -975,7 +975,7 @@ GameObject:
   m_Component:
   - component: {fileID: 855991538}
   - component: {fileID: 855991539}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Explosion Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExplosionMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   ExplosionGraphics: 02000000
   ExplosionGraphicDuration: 5
 --- !u!1 &901809702
@@ -1090,7 +1090,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1116336025}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Game Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1833,7 +1833,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2002705491}
   - component: {fileID: 2002705492}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Object Pool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2120,6 +2120,16 @@ PrefabInstance:
       propertyPath: SlopeCheckPoints.Array.data[3]
       value: 
       objectReference: {fileID: 1376991178}
+    - target: {fileID: 719555187020098098, guid: d1faaf30ea6b24da78bc2178565b3601,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 719555187020098098, guid: d1faaf30ea6b24da78bc2178565b3601,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 719555187377401773, guid: d1faaf30ea6b24da78bc2178565b3601,
         type: 3}
       propertyPath: m_LocalPosition.z

@@ -106,8 +106,9 @@ public class StandardTankFire : MonoBehaviour
             SelfGravity = stats.SelfGravity, 
             ExplosionRange = stats.ExplosionRange, 
             ExplosionPower = stats.ExplosionPower, 
+            ExplosionUpwardsModifier = stats.ExplosionUpwardsModifer,
             ExplosionScreenShake_Duration = stats.ExplosionScreenShake_Duration, 
-            ExplosionScreenShake_Intensity = stats.ExplosionScreenShake_Intensity 
+            ExplosionScreenShake_Intensity = stats.ExplosionScreenShake_Intensity, 
         };
         bullet.FireBullet(info);
 

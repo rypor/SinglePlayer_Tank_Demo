@@ -63,7 +63,7 @@ public class ObjectPool : MonoBehaviour
 
     public void ReturnObject(IPoolableObject poolableObject)
     {
-        Debug.Log("Returning Object: " + poolableObject.GameObject());
+        // Debug.Log("Returning Object: " + poolableObject.GameObject());
         if(poolableObject.Active)
             poolableObject.DisableObject();
         objectPoolDict[poolableObject.PrefabEnumValue].Add(poolableObject);
@@ -87,7 +87,7 @@ public class ObjectPool : MonoBehaviour
     // Creates Disabled instance of prefabEnum
     private IPoolableObject CreatePoolableObjectDisabled(PrefabEnum prefabEnum)
     {
-        Debug.Log(prefabEnum);
+        // Debug.Log(prefabEnum);
         GameObject g = prefabLinkDict[prefabEnum];
         IPoolableObject poolableObject = Instantiate(g, Vector3.zero, Quaternion.identity).GetComponent<IPoolableObject>();
         if(poolableObject.Equals(null))

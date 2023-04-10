@@ -125,7 +125,7 @@ namespace INoodleI
                         if(_angleFromFlat > 90) _angleFromFlat = 180 - _angleFromFlat;
                         float stepIncrement = Mathf.Clamp01((_angleFromFlat - stats.MinSlopeAngle) / (stats.MaxSlopeAngle - stats.MinSlopeAngle))
                             * Physics.gravity.y * stats.SlopeGravityModifier * Time.fixedDeltaTime;
-                        Debug.Log("_angleFromFlat: " + _angleFromFlat + ",  sInc: "+stepIncrement);
+                        // Debug.Log("_angleFromFlat: " + _angleFromFlat + ",  sInc: "+stepIncrement);
                         _treadSpeed = Utils.FloatStepWithIncrementTarget(_treadSpeed, 0, stepIncrement);
                     }
                     //_treadSpeed += _angleFromFlat / 90 * Physics.gravity.y * Time.fixedDeltaTime;
