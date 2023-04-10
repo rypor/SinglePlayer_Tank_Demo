@@ -16,6 +16,9 @@ public class StandardTankFireStats : ScriptableObject
 
     public float FiringDelay = 0.7f;
 
+    public float FiringScreenShake_Duration = 0.4f;
+    public float FiringScreenShake_Intensity = 1f;
+
     [Header("Bullet Properties")]
     public float FlatSpeed = 6;
     public float SelfGravity = -10;

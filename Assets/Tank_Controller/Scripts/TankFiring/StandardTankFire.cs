@@ -102,7 +102,9 @@ public class StandardTankFire : MonoBehaviour
         ITankBullet bullet = ObjectPool.instance.RequestObject(stats.BulletEnum, GunFirePoint.position, GunFirePoint.rotation, true).GameObject().GetComponent<ITankBullet>();
         BulletInfo info = new BulletInfo() { Vel = vel, SelfGravity = stats.SelfGravity, ExplosionRange = stats.ExplosionRange, ExplosionPower = stats.ExplosionPower };
         bullet.FireBullet(info);
+
         AudioManager.instance.PlaySoundAtPoint(AudioTypeEnum.StandardTankFire, GunFirePoint.position);
+        CameraManager.instance.StartScreenShake(stats.FiringScreenShake_Duration, stats.FiringScreenShake_Intensity);
     }
 
     private void UpdateGunVert(Vector3 vel)
