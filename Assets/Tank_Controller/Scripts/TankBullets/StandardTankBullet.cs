@@ -22,7 +22,7 @@ public class StandardTankBullet : MonoBehaviour, ITankBullet
 
     private void FixedUpdate()
     {
-        rb.velocity += Vector3.up * bulletInfo.SelfGravity * Time.fixedDeltaTime;
+        rb.velocity += Vector3.up * bulletInfo.SelfGravity * Time.deltaTime;
     }
 
     #endregion

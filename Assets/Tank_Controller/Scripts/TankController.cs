@@ -28,6 +28,8 @@ namespace INoodleI
         private float _treadSpeed;
         private float _treadRotSpeed;
 
+        private Vector3 _momentum;
+
         private bool MoveInputPressed => (Mathf.Abs(inputData.Movement.y) > stats.InputDeadzone);
         private bool TurnInputPressed => (Mathf.Abs(inputData.Movement.x) > stats.InputDeadzone);
         private bool ChangeMoveDir => MoveInputPressed && (Mathf.Abs(_treadSpeed) > 0.05f && Mathf.Sign(_treadSpeed) != Mathf.Sign(inputData.Movement.y));
@@ -129,13 +131,14 @@ namespace INoodleI
                     //_treadSpeed += _angleFromFlat / 90 * Physics.gravity.y * Time.fixedDeltaTime;
                 }
 
+                _momentum = rb.rotation * Vector3.forward * _treadSpeed * Time.fixedDeltaTime;
                 rb.MoveRotation(rb.rotation * Quaternion.Euler(new Vector3(0, _treadRotSpeed * Time.fixedDeltaTime, 0)));
-                rb.MovePosition(rb.position + rb.rotation * Vector3.forward * _treadSpeed * Time.fixedDeltaTime);
+                rb.MovePosition(rb.position + _momentum);
             }
             // Air Movement Influence Logic
             else
             {
-                rb.MovePosition(rb.position + rb.rotation * Vector3.forward * _treadSpeed * Time.fixedDeltaTime);
+                rb.MovePosition(rb.position + _momentum);
                 rb.MoveRotation(rb.rotation * Quaternion.Euler(new Vector3(0, _treadRotSpeed * Time.fixedDeltaTime, 0)));
             }
         }
