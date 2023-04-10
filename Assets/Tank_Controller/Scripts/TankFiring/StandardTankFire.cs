@@ -11,6 +11,9 @@ public class StandardTankFire : MonoBehaviour
 {
     #region Properties
 
+    [Header("Animator")]
+    [SerializeField] private Animator _animator;
+
     [Header("Gun References")]
     [SerializeField] private Transform GunPivotHorizontal;
     [SerializeField] private Transform GunPivotVertical;
@@ -114,6 +117,8 @@ public class StandardTankFire : MonoBehaviour
 
         AudioManager.instance.PlaySoundAtPoint(AudioTypeEnum.StandardTankFire, GunFirePoint.position);
         CameraManager.instance.StartScreenShake(stats.FiringScreenShake_Duration, stats.FiringScreenShake_Intensity);
+        Debug.Log("Playing Fire Animation");
+        _animator.Play("Fire");
     }
 
     private void UpdateGunVert(Vector3 vel)
