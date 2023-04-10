@@ -43,7 +43,20 @@ public class CameraManager : MonoBehaviour
         //float step = intensity / duration;
         CinemachineBasicMultiChannelPerlin channelPerlin = cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         channelPerlin.m_AmplitudeGain = intensity;
-        yield return new WaitForSeconds(duration);
+
+        float step = intensity * 2 / duration;
+        float timeStep = 0.02f;
+
+        yield return new WaitForSeconds(duration/2);
+        while(duration > 0)
+        {
+            channelPerlin.m_AmplitudeGain -= (step*timeStep);
+            Debug.Log(channelPerlin.m_AmplitudeGain);
+            duration -= timeStep * 2;
+            yield return new WaitForSeconds(timeStep);
+        }
+        
+        
         channelPerlin.m_AmplitudeGain = 0f;
     }
 
