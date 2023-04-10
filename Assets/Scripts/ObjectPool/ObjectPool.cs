@@ -114,4 +114,5 @@ public enum PrefabEnum
     StandardReticle,
     StandardTankBullet,
     ExplosionGraphic_1,
+    AudioSource,
 }

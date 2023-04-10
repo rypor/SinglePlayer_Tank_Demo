@@ -18,8 +18,8 @@ MonoBehaviour:
   MaxGunRange: 15
   GunRotateSpeed: 10
   FiringDelay: 0.7
-  FlatSpeed: 8
-  SelfGravity: -9
+  FlatSpeed: 12
+  SelfGravity: -12
   MaxReasonableLife: 30
   ExplosionRange: 10
   ExplosionPower: 20

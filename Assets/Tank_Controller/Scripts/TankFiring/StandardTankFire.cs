@@ -56,7 +56,7 @@ public class StandardTankFire : MonoBehaviour
         if (reticle)
         {
             UpdateGun();
-            FireGun();
+            HandleGun();
         }
     }
 
@@ -84,20 +84,27 @@ public class StandardTankFire : MonoBehaviour
         GunPivotHorizontal.rotation = Quaternion.Lerp(GunPivotHorizontal.rotation, lookRotation, stats.GunRotateSpeed * Time.fixedDeltaTime);
     }
 
-    private void FireGun()
+    private void HandleGun()
     {
         Vector3 vertRot = CalculateBulletTrajectory(GunFirePoint.position);
         UpdateGunVert(vertRot);
 
-        Vector3 vel = CalculateBulletTrajectory(GunFirePoint.position);
         if (_bufferFire)
         {
-            ITankBullet bullet = ObjectPool.instance.RequestObject(stats.BulletEnum, GunFirePoint.position, GunFirePoint.rotation, true).GameObject().GetComponent<ITankBullet>();
-            BulletInfo info = new BulletInfo() { Vel = vel, SelfGravity = stats.SelfGravity, ExplosionRange = stats.ExplosionRange, ExplosionPower = stats.ExplosionPower};
-            bullet.FireBullet(info);
+            FireGun();
             _bufferFire = false;
         }
     }
+
+    private void FireGun()
+    {
+        Vector3 vel = CalculateBulletTrajectory(GunFirePoint.position);
+        ITankBullet bullet = ObjectPool.instance.RequestObject(stats.BulletEnum, GunFirePoint.position, GunFirePoint.rotation, true).GameObject().GetComponent<ITankBullet>();
+        BulletInfo info = new BulletInfo() { Vel = vel, SelfGravity = stats.SelfGravity, ExplosionRange = stats.ExplosionRange, ExplosionPower = stats.ExplosionPower };
+        bullet.FireBullet(info);
+        AudioManager.instance.PlaySoundAtPoint(AudioTypeEnum.StandardTankFire, GunFirePoint.position);
+    }
+
     private void UpdateGunVert(Vector3 vel)
     {
         float riseOverRun = vel.y / new Vector2(vel.x, vel.z).magnitude;

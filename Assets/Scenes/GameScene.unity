@@ -850,6 +850,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594106017}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &671702151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 671702152}
+  - component: {fileID: 671702153}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &671702152
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671702151}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1116336025}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &671702153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671702151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff655fa675af6714297b9f3d1546f9f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioData:
+  - {fileID: 11400000, guid: 033477022eb3b974a93743201fa7de4a, type: 2}
 --- !u!4 &708187610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3701499659852394445, guid: d1faaf30ea6b24da78bc2178565b3601,
@@ -1051,6 +1097,7 @@ Transform:
   m_Children:
   - {fileID: 2002705491}
   - {fileID: 855991538}
+  - {fileID: 671702152}
   m_Father: {fileID: 1102055859}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1790,11 +1837,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numInitPrefabs: 10
   prefabLinkDict:
-    m_keys: 010000000000000002000000
+    m_keys: 01000000000000000200000003000000
     m_values:
     - {fileID: 9047621981249345141, guid: 0c84142d4c582fe4a99b9cfea971b632, type: 3}
     - {fileID: 6586675285179966162, guid: 635caa08d23c64456ae58ba5035e3ee0, type: 3}
     - {fileID: 6004627247909537395, guid: dbdae6c65e6fe0e4e828cd932eb0b46f, type: 3}
+    - {fileID: 3236769961562107589, guid: 1d0b288083d9e58419c8c0c55a32b01d, type: 3}
 --- !u!1 &2020581473
 GameObject:
   m_ObjectHideFlags: 0

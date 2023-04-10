@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b860a41cbf0bc854192b33d0b7320f92, type: 3}
+  m_Name: TankFire
+  m_EditorClassIdentifier: 
+  Type: 0
+  AudioClips:
+  - clip: {fileID: 8300000, guid: fd6e09128e3e67e40baf1e0c1db38809, type: 3}
+    volume: 100
+  - clip: {fileID: 8300000, guid: 162b7db656f74224ea7bbac42ba3baa4, type: 3}
+    volume: 100
+  - clip: {fileID: 8300000, guid: 908c1e8432be0384ca4649bfd67cd3c8, type: 3}
+    volume: 100
+  - clip: {fileID: 8300000, guid: cba3dbff68a673c47b30149e92c647b3, type: 3}
+    volume: 100
