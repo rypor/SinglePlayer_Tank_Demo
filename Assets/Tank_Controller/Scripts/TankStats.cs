@@ -22,6 +22,10 @@ public class TankStats : ScriptableObject
     public float RotAcceleration = 4f;
     public float RotDecceleration = 5f;
 
+    public float TreadSpeedReductionInAir = 5f;
+    public float TreadRotReductionInAir = 180f;
+    public float TreadSpeedToMomentumMultiplier = 1f;
+
     [Header("Grounding")]
     public Vector3 GroundingCheckSize;
     public float MaxGroundAngle = 35;

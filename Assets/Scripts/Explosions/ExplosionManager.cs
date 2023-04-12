@@ -42,11 +42,15 @@ public class ExplosionManager : MonoBehaviour
         Debug.Log("nH: " + numHit);
         for (int i = 0; i < numHit; i++)
         {
-            Collider obj = results[i];
-            if (obj.attachedRigidbody == null)
+            Rigidbody rb = results[i].attachedRigidbody;
+
+            if (rb == null)
                 continue;
 
-            obj.attachedRigidbody.AddExplosionForce(power, position, range, upwardsModifier, ForceMode.Impulse);
+            rb.AddExplosionForce(power, position, range, upwardsModifier, ForceMode.Impulse);
+
+            ITankController controller = rb.GetComponent<ITankController>();
+            //if (controller != null) controller.StopMotion();
         }
     }
 

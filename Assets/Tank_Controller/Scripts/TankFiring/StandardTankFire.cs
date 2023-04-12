@@ -146,7 +146,7 @@ public class StandardTankFire : MonoBehaviour
         bulletYVel = bulletYVel / travelTime;
 
         Vector3 velocity = dir.normalized * stats.FlatSpeed;
-        velocity.y = bulletYVel;
+        velocity.y = Mathf.Clamp(bulletYVel, -stats.MaxBulletYSpeed, stats.MaxBulletYSpeed);
 
         return velocity;
     }

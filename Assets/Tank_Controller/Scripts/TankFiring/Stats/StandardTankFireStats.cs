@@ -21,6 +21,7 @@ public class StandardTankFireStats : ScriptableObject
 
     [Header("Bullet Properties")]
     public float FlatSpeed = 6;
+    public float MaxBulletYSpeed = 20f;
     public float SelfGravity = -10;
     public float MaxReasonableLife = 30;
 

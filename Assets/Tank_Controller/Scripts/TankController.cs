@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace INoodleI
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(TankInput))]
-    public class TankController : MonoBehaviour
+    public class TankController : MonoBehaviour, ITankController
     {
         #region Variables
 
@@ -68,6 +69,23 @@ namespace INoodleI
 
         #endregion
 
+        #region ITankController Methods
+
+        public void StopMotion()
+        {
+            _treadSpeed = 0;
+            _treadRotSpeed = 0;
+            _momentum = Vector3.zero;
+            _grounded = false;
+        }
+
+        public void OnExplode()
+        {
+
+        }
+
+        #endregion
+
         #region Custom Methods
 
         private bool CheckGrounding(Transform t)
@@ -117,12 +135,13 @@ namespace INoodleI
                 //_treadRotSpeed = Utils.FloatStepWithIncrementTarget(_treadRotSpeed, targetRotSpd, rotAccel * Time.fixedDeltaTime);
 
                 // Reduce tank's ability to climb slopes. Only effective if tank is traveling uphill
-                if (Mathf.Abs(transform.forward.y * _treadSpeed) > 0.1)
+                if (transform.forward.y * _treadSpeed > 0.1)
                 {
                     float _angleFromFlat = Vector3.SignedAngle(transform.forward * _treadSpeed, new Vector3(transform.forward.x, 0, transform.forward.y), transform.right);
-                    if(_angleFromFlat > stats.MinSlopeAngle)
+                    if (_angleFromFlat > stats.MinSlopeAngle)
                     {
-                        if(_angleFromFlat > 90) _angleFromFlat = 180 - _angleFromFlat;
+                        if (_angleFromFlat > 90) _angleFromFlat = 180 - _angleFromFlat;
+                        Debug.Log("GOING UP SLOPE: "+_angleFromFlat);
                         float stepIncrement = Mathf.Clamp01((_angleFromFlat - stats.MinSlopeAngle) / (stats.MaxSlopeAngle - stats.MinSlopeAngle))
                             * Physics.gravity.y * stats.SlopeGravityModifier * Time.fixedDeltaTime;
                         // Debug.Log("_angleFromFlat: " + _angleFromFlat + ",  sInc: "+stepIncrement);
@@ -131,14 +150,17 @@ namespace INoodleI
                     //_treadSpeed += _angleFromFlat / 90 * Physics.gravity.y * Time.fixedDeltaTime;
                 }
 
-                _momentum = rb.rotation * Vector3.forward * _treadSpeed * Time.fixedDeltaTime;
+                Vector3 targetDir = rb.rotation * Vector3.forward * _treadSpeed;
+                _momentum = Vector3.Lerp(_momentum, targetDir, stats.TreadSpeedToMomentumMultiplier * Time.fixedDeltaTime);
                 rb.MoveRotation(rb.rotation * Quaternion.Euler(new Vector3(0, _treadRotSpeed * Time.fixedDeltaTime, 0)));
-                rb.MovePosition(rb.position + _momentum);
+                rb.MovePosition(rb.position + _momentum * Time.fixedDeltaTime);
             }
             // Air Movement Influence Logic
             else
             {
-                rb.MovePosition(rb.position + _momentum);
+                _treadSpeed = Utils.FloatStepWithIncrementTarget(_treadSpeed, 0, stats.TreadSpeedReductionInAir * Time.fixedDeltaTime);
+                _treadRotSpeed = Utils.FloatStepWithIncrementTarget(_treadRotSpeed, 0, stats.TreadSpeedReductionInAir * Time.fixedDeltaTime);
+                rb.MovePosition(rb.position + _momentum * Time.fixedDeltaTime);
                 rb.MoveRotation(rb.rotation * Quaternion.Euler(new Vector3(0, _treadRotSpeed * Time.fixedDeltaTime, 0)));
             }
         }
