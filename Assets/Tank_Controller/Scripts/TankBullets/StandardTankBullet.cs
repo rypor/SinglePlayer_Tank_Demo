@@ -44,7 +44,7 @@ public class StandardTankBullet : MonoBehaviour, ITankBullet
     {
         if (!gameObject.activeSelf)
             return;
-        Debug.Log(gameObject + " has hit: " + other.gameObject);
+
         ExplosionManager.instance.SpawnExplosion(rb.position, bulletInfo.ExplosionRange, bulletInfo.ExplosionPower, bulletInfo.ExplosionUpwardsModifier);
         AudioManager.instance.PlaySoundAtPoint(AudioTypeEnum.StandardExplosion, rb.position);
         CameraManager.instance.StartScreenShake(bulletInfo.ExplosionScreenShake_Duration, bulletInfo.ExplosionScreenShake_Intensity);

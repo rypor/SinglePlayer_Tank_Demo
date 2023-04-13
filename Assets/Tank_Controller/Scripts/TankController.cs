@@ -21,6 +21,7 @@ namespace INoodleI
         private ITankInput input;
         private Rigidbody rb;
         private InputData inputData;
+        private bool _hasInput = false;
 
         private bool _grounded;
         //private Vector3 _avgGroundNorm;
@@ -45,18 +46,15 @@ namespace INoodleI
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
-            input = GetComponent<PlayerTankInput>();
+            input = GetComponent<ITankInput>();
+            _hasInput = true;
 
             rb.centerOfMass = stats.CenterOfMass;
-        }
-        private void Update()
-        {
-            
         }
 
         private void FixedUpdate()
         {
-            if (stats && rb)
+            if (_hasInput && stats && rb)
             {
                 // Update Grounding
                 _grounded = CheckGrounding(TreadCheck);

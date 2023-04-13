@@ -39,7 +39,6 @@ public class ExplosionManager : MonoBehaviour
     private void TriggerExplosion(Vector3 position, float range, float power, float upwardsModifier)
     {
         int numHit = Physics.OverlapSphereNonAlloc(position, range, results, ExplosionMask);
-        Debug.Log("nH: " + numHit);
         for (int i = 0; i < numHit; i++)
         {
             Rigidbody rb = results[i].attachedRigidbody;

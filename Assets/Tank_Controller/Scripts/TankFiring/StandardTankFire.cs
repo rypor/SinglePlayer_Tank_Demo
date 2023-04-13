@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Windows;
 
-[RequireComponent(typeof(PlayerTankInput))]
+[RequireComponent(typeof(ITankInput))]
 public class StandardTankFire : MonoBehaviour
 {
     #region Properties
@@ -23,7 +23,7 @@ public class StandardTankFire : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private StandardTankFireStats stats;
 
-    private PlayerTankInput input;
+    private ITankInput input;
     private InputData inputData;
 
     private float _targetGunAngle;
@@ -31,6 +31,7 @@ public class StandardTankFire : MonoBehaviour
     private Vector3 _target;
 
     private bool _bufferFire;
+    private bool _hasInputClass = false;
 
     #endregion
 
@@ -38,14 +39,15 @@ public class StandardTankFire : MonoBehaviour
 
     private void Start()
     {
-        input = GetComponent<PlayerTankInput>();
+        input = GetComponent<ITankInput>();
+        _hasInputClass = true;
 
         reticle = ObjectPool.instance.RequestObject(stats.ReticleEnum, Vector3.zero, Quaternion.identity, true).GameObject().transform;
     }
 
     private void Update()
     {
-        if (input)
+        if (_hasInputClass)
         {
             inputData = input.InputData;
 
@@ -117,7 +119,6 @@ public class StandardTankFire : MonoBehaviour
 
         AudioManager.instance.PlaySoundAtPoint(AudioTypeEnum.StandardTankFire, GunFirePoint.position);
         CameraManager.instance.StartScreenShake(stats.FiringScreenShake_Duration, stats.FiringScreenShake_Intensity);
-        Debug.Log("Playing Fire Animation");
         _animator.Play("Fire");
     }
 

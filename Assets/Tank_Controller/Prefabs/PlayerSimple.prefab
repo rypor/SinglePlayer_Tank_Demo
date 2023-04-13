@@ -998,6 +998,7 @@ GameObject:
   - component: {fileID: 719555187020098096}
   - component: {fileID: 719555187020098098}
   - component: {fileID: 1263423997}
+  - component: {fileID: 719555187418181986}
   m_Layer: 6
   m_Name: PlayerSimple
   m_TagString: Untagged
@@ -1054,7 +1055,7 @@ MonoBehaviour:
   - {fileID: 1376991178}
   stats: {fileID: 11400000, guid: afeb94f0f9cd56245bd4d6783d70efdd, type: 2}
   DebugTreadBox: 0
-  DebugCenterOfMass: 0
+  DebugCenterOfMass: 1
   DebugSlopeCheck: 0
 --- !u!54 &719555187020098098
 Rigidbody:
@@ -1089,6 +1090,19 @@ MonoBehaviour:
   GunPivotVertical: {fileID: 3701499659852394445}
   GunFirePoint: {fileID: 1358362612}
   stats: {fileID: 11400000, guid: bb7b9ad9f6a173d4f9427183bdac6aa4, type: 2}
+--- !u!114 &719555187418181986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719555187020098094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8435ae608a1c1f14bb057308ba7cc62b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resetLocation: {fileID: 0}
 --- !u!1001 &4923451745627869895
 PrefabInstance:
   m_ObjectHideFlags: 0
