@@ -15,14 +15,17 @@ MonoBehaviour:
   GroundMask:
     serializedVersion: 2
     m_Bits: 1024
-  CenterOfMass: {x: 0, y: 0.12, z: 0}
+  CenterOfMass: {x: 0, y: 0.08, z: 0}
   InputDeadzone: 0.1
   MaxSpeed: 12
-  Acceleration: 1.5
+  Acceleration: 2
   Decceleration: 2.5
   RotMaxSpeed: 210
   RotAcceleration: 1.5
   RotDecceleration: 3
+  TreadSpeedReductionInAir: 8
+  TreadRotReductionInAir: 5
+  TreadSpeedToMomentumMultiplier: 10
   GroundingCheckSize: {x: 1.2, y: 0.025, z: 1.22}
   MaxGroundAngle: 2
   MaxFullSpeedGroundAngle: 1

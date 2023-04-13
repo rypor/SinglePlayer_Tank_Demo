@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Windows;
 
-[RequireComponent(typeof(TankInput))]
+[RequireComponent(typeof(PlayerTankInput))]
 public class StandardTankFire : MonoBehaviour
 {
     #region Properties
@@ -23,7 +23,7 @@ public class StandardTankFire : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private StandardTankFireStats stats;
 
-    private TankInput input;
+    private PlayerTankInput input;
     private InputData inputData;
 
     private float _targetGunAngle;
@@ -38,7 +38,7 @@ public class StandardTankFire : MonoBehaviour
 
     private void Start()
     {
-        input = GetComponent<TankInput>();
+        input = GetComponent<PlayerTankInput>();
 
         reticle = ObjectPool.instance.RequestObject(stats.ReticleEnum, Vector3.zero, Quaternion.identity, true).GameObject().transform;
     }

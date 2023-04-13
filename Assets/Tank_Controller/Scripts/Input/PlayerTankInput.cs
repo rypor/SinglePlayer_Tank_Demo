@@ -5,7 +5,7 @@ using UnityEngine.PlayerLoop;
 
 namespace INoodleI
 {
-    public class TankInput : MonoBehaviour
+    public class PlayerTankInput : MonoBehaviour, ITankInput
     {
         #region Variables
 
@@ -111,16 +111,5 @@ namespace INoodleI
         }
 
         #endregion
-    }
-
-    public struct InputData
-    {
-        public Vector2 Movement;
-        public bool FirePressed;
-        public bool MinePressed;
-
-        public bool ReticleHit;
-        public Vector3 ReticlePosition;
-        public Vector3 ReticleNormal;
     }
 }

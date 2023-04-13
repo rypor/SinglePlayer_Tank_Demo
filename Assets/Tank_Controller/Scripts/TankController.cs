@@ -6,7 +6,7 @@ using UnityEngine;
 namespace INoodleI
 {
     [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(TankInput))]
+    [RequireComponent(typeof(ITankInput))]
     public class TankController : MonoBehaviour, ITankController
     {
         #region Variables
@@ -18,9 +18,9 @@ namespace INoodleI
         public Transform TreadCheck;
         public List<Transform> SlopeCheckPoints;
 
-        private InputData inputData;
+        private ITankInput input;
         private Rigidbody rb;
-        private TankInput input;
+        private InputData inputData;
 
         private bool _grounded;
         //private Vector3 _avgGroundNorm;
@@ -45,14 +45,18 @@ namespace INoodleI
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
-            input = GetComponent<TankInput>();
+            input = GetComponent<PlayerTankInput>();
 
             rb.centerOfMass = stats.CenterOfMass;
+        }
+        private void Update()
+        {
+            
         }
 
         private void FixedUpdate()
         {
-            if (input && stats && rb)
+            if (stats && rb)
             {
                 // Update Grounding
                 _grounded = CheckGrounding(TreadCheck);
