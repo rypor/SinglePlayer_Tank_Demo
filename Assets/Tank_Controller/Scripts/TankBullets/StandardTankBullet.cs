@@ -45,9 +45,10 @@ public class StandardTankBullet : MonoBehaviour, ITankBullet
         if (!gameObject.activeSelf)
             return;
 
-        ExplosionManager.instance.SpawnExplosion(rb.position, bulletInfo.ExplosionRange, bulletInfo.ExplosionPower, bulletInfo.ExplosionUpwardsModifier);
+        //ExplosionManager.instance.SpawnExplosion(rb.position, bulletInfo.ExplosionRange, bulletInfo.ExplosionPower, bulletInfo.ExplosionUpwardsModifier);
         AudioManager.instance.PlaySoundAtPoint(AudioTypeEnum.StandardExplosion, rb.position);
         CameraManager.instance.StartScreenShake(bulletInfo.ExplosionScreenShake_Duration, bulletInfo.ExplosionScreenShake_Intensity);
+        PaintManager.instance.PaintSphere(rb.position, bulletInfo.ExplosionRange * bulletInfo.PaintSizeModifier, 0.4f, new Color(Random.Range(0f,1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1));
         selfPoolableObject.DisableObject();
     }
 
@@ -70,4 +71,6 @@ public struct BulletInfo
 
     public float ExplosionScreenShake_Duration;
     public float ExplosionScreenShake_Intensity;
+
+    public float PaintSizeModifier;
 }

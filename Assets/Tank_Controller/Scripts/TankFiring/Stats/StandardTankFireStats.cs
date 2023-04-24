@@ -31,4 +31,7 @@ public class StandardTankFireStats : ScriptableObject
     public float ExplosionUpwardsModifer = 1f;
     public float ExplosionScreenShake_Duration = 0.6f;
     public float ExplosionScreenShake_Intensity = 1.5f;
+
+    [Header("Paint Properties")]
+    public float PaintSizeModifier = 0.8f;
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7279742247391554223}
   - component: {fileID: 7279742247391554222}
   - component: {fileID: 7279742247391554224}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FloorTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2948
+  m_VersionIndex: 2954
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

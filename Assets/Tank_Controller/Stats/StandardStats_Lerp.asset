@@ -17,12 +17,12 @@ MonoBehaviour:
     m_Bits: 1024
   CenterOfMass: {x: 0, y: 0.08, z: 0}
   InputDeadzone: 0.1
-  MaxSpeed: 12
+  MaxSpeed: 8
   Acceleration: 2
   Decceleration: 2.5
-  RotMaxSpeed: 210
+  RotMaxSpeed: 190
   RotAcceleration: 1.5
-  RotDecceleration: 3
+  RotDecceleration: 4
   TreadSpeedReductionInAir: 8
   TreadRotReductionInAir: 5
   TreadSpeedToMomentumMultiplier: 10

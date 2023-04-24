@@ -21,10 +21,12 @@ MonoBehaviour:
   FiringScreenShake_Duration: 0.1
   FiringScreenShake_Intensity: 1
   FlatSpeed: 12
+  MaxBulletYSpeed: 20
   SelfGravity: -12
   MaxReasonableLife: 30
-  ExplosionRange: 7
+  ExplosionRange: 6
   ExplosionPower: 25
   ExplosionUpwardsModifer: 1.5
   ExplosionScreenShake_Duration: 0.2
   ExplosionScreenShake_Intensity: 3
+  PaintSizeModifier: 0.75

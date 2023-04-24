@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEngine.Networking.UnityWebRequest;
 
 public class PaintManager : MonoBehaviour
 {
@@ -38,13 +39,13 @@ public class PaintManager : MonoBehaviour
         Paint(paintableObject, Vector3.zero, 999999, 1, new Color(0, 0, 0, 0));
     }
 
-    public void Paint(PaintableObject paintableObject, Vector3 pos, float rad, float hardness, Color color)
+    public void Paint(PaintableObject paintableObject, Vector3 pos, float radius, float hardness, Color color)
     {
         RenderTexture mask = paintableObject.getMask();
         RenderTexture support = paintableObject.getSupport();
         Renderer rend = paintableObject.getRenderer();
 
-        paintMaterial.SetFloat(radiusID, rad);
+        paintMaterial.SetFloat(radiusID, radius);
         paintMaterial.SetFloat(hardnessID, hardness);
         paintMaterial.SetColor(colorID, color);
         paintMaterial.SetVector(positionID, pos);
@@ -58,5 +59,20 @@ public class PaintManager : MonoBehaviour
 
         Graphics.ExecuteCommandBuffer(command);
         command.Clear();
+    }
+
+    Collider[] results;
+    public void PaintSphere(Vector3 pos, float radius, float hardness, Color color)
+    {
+        results = Physics.OverlapSphere(pos, radius);
+        Debug.Log(results.Length + " - " + radius + " - " + pos);
+        for (int i = 0; i < results.Length; i++)
+        {
+            PaintableObject paintableObject = results[i].GetComponent<PaintableObject>();
+            if (paintableObject != null)
+            {
+                PaintManager.instance.Paint(paintableObject, pos, radius, hardness, color);
+            }
+        }
     }
 }
