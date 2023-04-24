@@ -49,7 +49,6 @@ public class MenuSceneTank : MonoBehaviour, ITankInput
 
     private void ChooseNewLookAtPoint()
     {
-        Debug.Log(_lookAtPoints.Count + ",  s: "+_selectedIndex);
         if(_lookAtPoints.Count > 1)
         {
             int newIndex = _selectedIndex;
@@ -58,7 +57,6 @@ public class MenuSceneTank : MonoBehaviour, ITankInput
                 newIndex = Random.Range(0, _lookAtPoints.Count);
             }
             _selectedIndex = newIndex;
-            Debug.Log("s: " + _selectedIndex);
         }
     }
 }
