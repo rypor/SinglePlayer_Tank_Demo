@@ -15,10 +15,10 @@ MonoBehaviour:
   Type: 0
   AudioClips:
   - clip: {fileID: 8300000, guid: fd6e09128e3e67e40baf1e0c1db38809, type: 3}
-    volume: 100
+    volume: 0.9
   - clip: {fileID: 8300000, guid: 162b7db656f74224ea7bbac42ba3baa4, type: 3}
-    volume: 100
+    volume: 0.9
   - clip: {fileID: 8300000, guid: 908c1e8432be0384ca4649bfd67cd3c8, type: 3}
-    volume: 100
+    volume: 0.9
   - clip: {fileID: 8300000, guid: cba3dbff68a673c47b30149e92c647b3, type: 3}
-    volume: 100
+    volume: 0.9

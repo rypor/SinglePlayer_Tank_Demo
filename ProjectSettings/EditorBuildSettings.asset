@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/ClipSpace/ClipSpace.unity
+    guid: e981098e7f622714692d69cea6033a6d
   m_configObjects: {}

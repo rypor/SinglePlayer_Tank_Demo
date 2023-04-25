@@ -17,7 +17,7 @@ MonoBehaviour:
     m_Bits: 1024
   CenterOfMass: {x: 0, y: 0.08, z: 0}
   InputDeadzone: 0.1
-  MaxSpeed: 8
+  MaxSpeed: 10
   Acceleration: 2
   Decceleration: 2.5
   RotMaxSpeed: 190
@@ -29,6 +29,7 @@ MonoBehaviour:
   GroundingCheckSize: {x: 1.2, y: 0.025, z: 1.22}
   MaxGroundAngle: 2
   MaxFullSpeedGroundAngle: 1
+  GroundingForce: 99
   MinSlopeAngle: 20
   MaxSlopeAngle: 60
   SlopeGravityModifier: 1

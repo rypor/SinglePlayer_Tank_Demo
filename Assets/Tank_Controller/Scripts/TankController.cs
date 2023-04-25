@@ -157,6 +157,7 @@ namespace INoodleI
                 rb.MoveRotation(rb.rotation * Quaternion.Euler(new Vector3(0, _treadRotSpeed * Time.fixedDeltaTime, 0)));
                 rb.MovePosition(rb.position + _momentum * Time.fixedDeltaTime);
                 rb.AddForce(Vector3.down * stats.GroundingForce * Time.fixedDeltaTime, ForceMode.Impulse);
+                PaintManager.instance.PaintSphere(rb.position, 1.5f, 0.1f, Color.red);
             }
             // Air Movement Influence Logic
             else

@@ -10,7 +10,8 @@ public static class Loader
     {
         MainMenuScene,
         GameScene,
-        LoadingScene
+        LoadingScene,
+        ClipSpace,
     }
 
     public static void Load(Scene targetScene)
