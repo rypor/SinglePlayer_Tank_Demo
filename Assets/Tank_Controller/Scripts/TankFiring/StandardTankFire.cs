@@ -33,6 +33,11 @@ public class StandardTankFire : MonoBehaviour
     private bool _bufferFire;
     private bool _hasInputClass = false;
 
+    private float _fireDelay;
+    private float _bufferTimer;
+    private bool CanFire => (_fireDelay <= 0) && _bufferFire;
+    private bool BufferedFire => _bufferFire && (_bufferTimer > 0);
+
     #endregion
 
     #region Built-in Methods
@@ -43,6 +48,7 @@ public class StandardTankFire : MonoBehaviour
         _hasInputClass = true;
 
         reticle = ObjectPool.instance.RequestObject(stats.ReticleEnum, Vector3.zero, Quaternion.identity, true).GameObject().transform;
+        _fireDelay = 0;
     }
 
     private void Update()
@@ -52,7 +58,10 @@ public class StandardTankFire : MonoBehaviour
             inputData = input.InputData;
 
             if (inputData.FirePressed)
+            {
                 _bufferFire = true;
+                _bufferTimer = stats.FiringBufferTime;
+            }
         }
     }
 
@@ -94,11 +103,12 @@ public class StandardTankFire : MonoBehaviour
         Vector3 vertRot = CalculateBulletTrajectory(GunFirePoint.position);
         UpdateGunVert(vertRot);
 
-        if (_bufferFire)
+        if (BufferedFire && CanFire)
         {
             FireGun();
             _bufferFire = false;
         }
+        _bufferTimer -= Time.fixedDeltaTime;
     }
 
     private void FireGun()

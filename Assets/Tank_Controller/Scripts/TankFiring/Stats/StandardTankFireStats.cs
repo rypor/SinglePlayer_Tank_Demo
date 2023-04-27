@@ -15,6 +15,7 @@ public class StandardTankFireStats : ScriptableObject
     public float GunRotateSpeed = 3f;
 
     public float FiringDelay = 0.7f;
+    public float FiringBufferTime = 0.1f;
 
     public float FiringScreenShake_Duration = 0.4f;
     public float FiringScreenShake_Intensity = 1f;
