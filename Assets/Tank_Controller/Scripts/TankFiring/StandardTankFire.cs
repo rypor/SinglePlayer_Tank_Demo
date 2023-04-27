@@ -107,8 +107,10 @@ public class StandardTankFire : MonoBehaviour
         {
             FireGun();
             _bufferFire = false;
+            _fireDelay = stats.FiringDelay;
         }
         _bufferTimer -= Time.fixedDeltaTime;
+        _fireDelay -= Time.fixedDeltaTime;
     }
 
     private void FireGun()
