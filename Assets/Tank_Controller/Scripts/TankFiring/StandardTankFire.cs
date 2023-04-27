@@ -33,9 +33,12 @@ public class StandardTankFire : MonoBehaviour
     private bool _bufferFire;
     private bool _hasInputClass = false;
 
-    private float _fireDelay;
+    private int _numShotsFiredSinceDelay;
+
+    private float _fireDelayTimer;
+    private float _fireReloadTimer;
     private float _bufferTimer;
-    private bool CanFire => (_fireDelay <= 0) && _bufferFire;
+    private bool CanFire => _bufferFire && (_fireDelayTimer <= 0) && (_numShotsFiredSinceDelay < stats.ShotsBeforeForceReload);
     private bool BufferedFire => _bufferFire && (_bufferTimer > 0);
 
     #endregion
@@ -48,7 +51,8 @@ public class StandardTankFire : MonoBehaviour
         _hasInputClass = true;
 
         reticle = ObjectPool.instance.RequestObject(stats.ReticleEnum, Vector3.zero, Quaternion.identity, true).GameObject().transform;
-        _fireDelay = 0;
+        _fireDelayTimer = 0;
+        _numShotsFiredSinceDelay = 0;
     }
 
     private void Update()
@@ -107,10 +111,19 @@ public class StandardTankFire : MonoBehaviour
         {
             FireGun();
             _bufferFire = false;
-            _fireDelay = stats.FiringDelay;
+            _fireReloadTimer = stats.FiringReloadTime;
+            _fireDelayTimer = stats.FiringDelayTime;
+            _numShotsFiredSinceDelay++;
         }
         _bufferTimer -= Time.fixedDeltaTime;
-        _fireDelay -= Time.fixedDeltaTime;
+        _fireReloadTimer -= Time.fixedDeltaTime;
+        _fireDelayTimer -= Time.fixedDeltaTime;
+        if(_fireReloadTimer <= 0)
+            Reload();
+    }
+    private void Reload()
+    {
+        _numShotsFiredSinceDelay = 0;
     }
 
     private void FireGun()

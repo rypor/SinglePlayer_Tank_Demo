@@ -20,8 +20,8 @@ MonoBehaviour:
   MaxSpeed: 10
   Acceleration: 2
   Decceleration: 2.5
-  RotMaxSpeed: 190
-  RotAcceleration: 1.5
+  RotMaxSpeed: 200
+  RotAcceleration: 1.7
   RotDecceleration: 4
   TreadSpeedReductionInAir: 8
   TreadRotReductionInAir: 5
