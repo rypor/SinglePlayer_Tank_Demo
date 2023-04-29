@@ -39,7 +39,7 @@ public class PaintManager : MonoBehaviour
         Paint(paintableObject, Vector3.zero, 999999, 1, new Color(0, 0, 0, 0));
     }
 
-    public void Paint(PaintableObject paintableObject, Vector3 pos, float radius, float hardness, Color color)
+    private void Paint(PaintableObject paintableObject, Vector3 pos, float radius, float hardness, Color color)
     {
         RenderTexture mask = paintableObject.getMask();
         RenderTexture support = paintableObject.getSupport();
@@ -65,7 +65,7 @@ public class PaintManager : MonoBehaviour
     public void PaintSphere(Vector3 pos, float radius, float hardness, Color color)
     {
         results = Physics.OverlapSphere(pos, radius);
-        Debug.Log(results.Length + " - " + radius + " - " + pos);
+        //Debug.Log(results.Length + " - " + radius + " - " + pos);
         for (int i = 0; i < results.Length; i++)
         {
             PaintableObject paintableObject = results[i].GetComponent<PaintableObject>();

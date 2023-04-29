@@ -20301,6 +20301,11 @@ PrefabInstance:
       propertyPath: DebugCenterOfMass
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 719555187020098097, guid: d1faaf30ea6b24da78bc2178565b3601,
+        type: 3}
+      propertyPath: reticleLayerMask.m_Bits
+      value: 1339
+      objectReference: {fileID: 0}
     - target: {fileID: 719555187418181986, guid: d1faaf30ea6b24da78bc2178565b3601,
         type: 3}
       propertyPath: _resetLocation
@@ -20933,7 +20938,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2620
+  m_Name: pb_Mesh-2618
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
