@@ -20,6 +20,7 @@ namespace INoodleI
         private Vector3 reticlePosition;
         private Vector3 reticleNormal;
         private InputData inputData;
+        public LayerMask reticleLayerMask;
 
         public InputData InputData { get { return inputData; } }
 
@@ -79,7 +80,7 @@ namespace INoodleI
             // Mouse Target Input
             Ray screenRay = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if(Physics.Raycast(screenRay, out hit))
+            if(Physics.Raycast(screenRay, out hit, Mathf.Infinity, reticleLayerMask))
             {
                 reticleHit = true;
                 reticlePosition = hit.point;
