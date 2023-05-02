@@ -19,16 +19,7 @@ public class MouseClickPainter : MonoBehaviour
         {
             if(Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition), out hit))
             {
-                results = Physics.OverlapSphere(hit.point, radius);
-                Debug.Log(results.Length+" - "+ radius+" - "+hit.point);
-                for (int i = 0; i < results.Length; i++)
-                {
-                    PaintableObject paintableObject = results[i].GetComponent<PaintableObject>();
-                    if (paintableObject != null)
-                    {
-                        PaintManager.instance.Paint(paintableObject, hit.point, radius, hardness, color);
-                    }
-                }
+                PaintManager.instance.PaintSphere(hit.point, radius, hardness, color);
             }
         }
     }
