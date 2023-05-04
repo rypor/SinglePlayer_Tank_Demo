@@ -73,12 +73,13 @@ public class StandardTankFire : MonoBehaviour
     {
         if (reticle)
         {
-            UpdateGun();
-            HandleGun();
+            UpdateGunPos();
+            if(GameManager.instance.IsGamePlaying())
+                HandleFire();
         }
     }
 
-    private void UpdateGun()
+    private void UpdateGunPos()
     {
         if (inputData.ReticleHit)
         {
@@ -100,13 +101,13 @@ public class StandardTankFire : MonoBehaviour
 
         Quaternion lookRotation = Quaternion.LookRotation(_targetLookDir, Vector3.up);
         GunPivotHorizontal.rotation = Quaternion.Lerp(GunPivotHorizontal.rotation, lookRotation, stats.GunRotateSpeed * Time.fixedDeltaTime);
-    }
 
-    private void HandleGun()
-    {
         Vector3 vertRot = CalculateBulletTrajectory(GunFirePoint.position);
         UpdateGunVert(vertRot);
+    }
 
+    private void HandleFire()
+    {
         if (BufferedFire && CanFire)
         {
             FireGun();
